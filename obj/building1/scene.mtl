@@ -1,0 +1,56 @@
+# wavefront mtl file written by the visualization toolkit
+
+newmtl mtl1
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+Ns 100
+Tr 1
+illum 3
+map_Kd ./scenetexture1.png
+
+newmtl mtl5
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+Ns 100
+Tr 1
+illum 3
+map_Kd ./scenetexture5.png
+
+newmtl mtl9
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+Ns 100
+Tr 1
+illum 3
+map_Kd ./scenetexture9.png
+
+newmtl mtl13
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+Ns 100
+Tr 1
+illum 3
+map_Kd ./scenetexture13.png
+
+newmtl mtl17
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+Ns 100
+Tr 1
+illum 3
+map_Kd ./scenetexture17.png
+
+newmtl mtl21
+Ka 0 0 0
+Kd 1 1 1
+Ks 0 0 0
+Ns 100
+Tr 1
+illum 3
+map_Kd ./scenetexture21.png
+
