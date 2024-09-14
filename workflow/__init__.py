@@ -4,7 +4,7 @@ from .deshadow import Deshadow
 from .diffusion import Diffusion
 from .exposure import Exposure
 from .masking import Masking
-
+from .brightness import Brightness
 
 
 def preprocess(inputs: [list[str], str]):
@@ -30,3 +30,6 @@ def exposure(inputs):
 
 def masking(inputs):
     return Masking(inputs)
+
+def brightness(inputs):
+    return Brightness(inputs)
