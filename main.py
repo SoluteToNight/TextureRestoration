@@ -13,14 +13,14 @@ if __name__ == '__main__':
         fd_path.append(os.path.join(obj_folder, fd))
     img_dir = os.listdir(fd_path[2])
     img_dir = list(filter(lambda x: x.rfind(".png") != -1, img_dir))
-    # img_dir  = [path for path in img_dir if path.rfind(".png") != -1]
-    # for i in range(len(img_dir)):
-    #     img_dir[i] = os.path.join(scripts_path,fd_path[0], img_dir[i])
+    img_dir  = [path for path in img_dir if path.rfind(".png") != -1]
+    for i in range(len(img_dir)):
+        img_dir[i] = os.path.join(scripts_path,fd_path[2], img_dir[i])
     # for img in img_dir:
     #     flow = workflow.analyse(img)
     #     result = flow.process()
     #     print(result)
     print(img_dir)
-    flow = workflow.brightness(img_dir)
-    # flow.process()
+    flow = workflow.Brightness(img_dir)
+    flow.process()
     print("114514")
