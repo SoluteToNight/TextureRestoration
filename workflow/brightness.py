@@ -12,14 +12,8 @@ class image:
         self.data = cv.imread(path)
         self.name = os.path.basename(path)
         self.brightness = None
-def read_image(path,img_list):
-    img = cv.imread(path)
-    img_dict = {
-        "data": img,
-        "name": os.path.basename(path),
-        "brightness": None
-    }
-    img_list.append(img_dict)
+    def save(self, path):
+        cv.imwrite(path, self.data)
 
 
 class Brightness(node.Node):
@@ -35,22 +29,20 @@ class Brightness(node.Node):
         low = min(self.img_list,key=lambda x: x.brightness)
         high = max(self.img_list,key=lambda x: x.brightness)
         print("Average brightness:", average_brightness)
-        if average_brightness - low.brightness> 10 or high.brightness - average_brightness > 10:
+        if average_brightness - low.brightness > 10 or high.brightness - average_brightness > 10:
             if average_brightness - low.brightness > high.brightness - average_brightness:
                 print("Brightness is too low")
                 value = average_brightness- low.brightness
                 self.balance_brightness(low,value)
-                self.process()
+                return self.process()
             else:
                 print("Brightness is too high")
                 value = average_brightness-high.brightness
                 self.balance_brightness(high,value)
-                self.process()
+                return self.process()
         else:
             print("Brightness is OK")
-            cv.imshow("1",self.img_list[-1].data)
-            cv.waitKey(0)
-            return True
+            return self.img_list
 
     def calculate_brightness(self):
         overall_brightness = 0
@@ -64,8 +56,7 @@ class Brightness(node.Node):
             overall_brightness += brightness
         return overall_brightness
     def balance_brightness(self,img:image,value):
-        data = img.data
-        data = data.astype(np.float32)
+        data = img.data.astype(np.float32)
         brightness_weights = np.array([0.114, 0.587, 0.299])
         weighted_brightness = np.sum(img.data[..., :3] * brightness_weights.reshape(1, 1, 3), axis=2, keepdims=True)
         adjusted_brightness = weighted_brightness * (1+value/255)
