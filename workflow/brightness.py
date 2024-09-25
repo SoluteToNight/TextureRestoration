@@ -55,6 +55,7 @@ class Brightness(node.Node):
             img.brightness = brightness
             overall_brightness += brightness
         return overall_brightness
+
     def balance_brightness(self,img:image,value):
         data = img.data.astype(np.float32)
         brightness_weights = np.array([0.114, 0.587, 0.299])
