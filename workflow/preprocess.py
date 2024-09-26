@@ -2,7 +2,7 @@ from . import node
 import os
 import shutil
 # 预处理，虽然我也不知道干嘛用
-
+from img_class import TextureImage as timg
 
 class PreProcess(node.Node):
     def __init__(self, inputs=None):
@@ -27,7 +27,10 @@ class PreProcess(node.Node):
                     in_path = os.path.join(input_path, content)
                     out_path = os.path.join(output_dir, content)
                     shutil.copy(in_path, out_path)
-
+                elif content.rfind(".jpg") != -1 or content.rfind(".png") != -1:
+                    img_path = os.path.join(input_path, content)
+                    img = timg(img_path)
+                    self.img_list.append(img)
 
     def mtl_handel(self,input_path):
         mtl_path = None
