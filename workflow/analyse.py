@@ -11,6 +11,7 @@ class Analyse(Node):
         super().__init__(inputs)
         self.model = "llava:latest"
         self.keywords = ["blur,missing,watermark,color balance,noise,lighting"]
+        self.convert()
     def convert(self):
         for img in self.img_list:
             buffered = BytesIO()
@@ -23,7 +24,7 @@ class Analyse(Node):
             message = {
                 'role': 'user',
                 'content': f'This is a picture of a modern building,but the quality of this picture is low.Please analyse the proplem of this picture,please give me answer base on these key words{self.keywords}',
-                'images': [image]
+                'images': [img.tmp_data]
             }
             stream = ollama.chat(
                 model=self.model,
