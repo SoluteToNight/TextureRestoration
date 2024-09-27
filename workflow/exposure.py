@@ -1,8 +1,8 @@
 #用于调整亮度
-from . import node
+from .node import Node
 
 
-class Exposure(node.Node):
+class Exposure(Node):
     def __init__(self, inputs=None):
         super().__init__(inputs)
     def process(self):

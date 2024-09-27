@@ -1,6 +1,6 @@
-from . import node
+from .node import Node
 #去阴影
-class Deshadow(node.Node):
+class Deshadow(Node):
     def __init__(self,inputs=None):
         super().__init__(inputs)
     def process(self):

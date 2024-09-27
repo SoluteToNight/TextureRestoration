@@ -1,4 +1,4 @@
-from . import node
+from .node import Node
 import ollama
 import base64
 from io import BytesIO
@@ -6,7 +6,7 @@ from PIL import Image
 
 #调用llava进行分析
 
-class Analyse(node.Node):
+class Analyse(Node):
     def __init__(self, inputs=None):
         super().__init__(inputs)
         self.model = "llava:latest"

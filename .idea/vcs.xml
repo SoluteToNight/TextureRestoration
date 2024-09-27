@@ -2,7 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/models/architecturerealmix" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/models/instruct-pix2pix" vcs="Git" />
   </component>
 </project>

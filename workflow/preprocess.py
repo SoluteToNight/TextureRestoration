@@ -1,10 +1,10 @@
-from . import node
+from .node import Node
 import os
 import shutil
 # 预处理，虽然我也不知道干嘛用
 from img_class import TextureImage as timg
 
-class PreProcess(node.Node):
+class PreProcess(Node):
     def __init__(self, inputs=None):
         super().__init__(inputs)
 

@@ -1,11 +1,11 @@
 import os.path
 from PIL import Image
 import cv2 as cv
-from . import node
+from .node import Node
 import numpy as np
 from img_class import TextureImage as timg
 
-class Brightness(node.Node):
+class Brightness(Node):
     def __init__(self,inputs=None):
         super().__init__(inputs)
         self.convert()
