@@ -11,8 +11,7 @@ class Brightness(Node):
         self.convert()
     def convert(self):
         for img in self.img_list:
-            img.tmp_data = np.array(img.img_data)
-            img.tmp_data = cv.cvtColor(img.tmp_data,cv.COLOR_RGB2BGR)
+            img.tmp_data = np.array(img.img_data)[:, :, ::-1]
     def process(self):
         overall_brightness = self.calculate_brightness()
         average_brightness = overall_brightness / len(self.img_list)
@@ -52,11 +51,11 @@ class Brightness(Node):
         weighted_brightness = np.sum(data[..., :3] * brightness_weights.reshape(1, 1, 3), axis=2, keepdims=True)
         adjusted_brightness = weighted_brightness * (1+value/255)
         delta_brightness = adjusted_brightness - weighted_brightness
-        adjusted_img = img.data + delta_brightness
+        adjusted_img = img.tmp_data + delta_brightness
         adjusted_img = np.clip(adjusted_img, 0, 255)
         # 转换回uint8类型
         data = adjusted_img.astype(np.uint8)
-        img.data = data
+        img.tmp_data = data
     def conver_back(self):
         for img in self.img_list:
             img.tmp_data = cv.cvtColor(img.tmp_data,cv.COLOR_BGR2RGB)

@@ -23,10 +23,11 @@ class Diffusion(Node):
                                                                       safety_checker=None)
         pipe.to("cuda")
         pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
-        prompt = "turn him into cyborg"
+        prompt = "erase blur,fix distoration,remove shadows and fill missing area"
+        neg_prompt = "blur,distortion,shadow"
         for img in self.img_list:
             image = img.tmp_data
-            images = pipe(prompt, image=image, num_inference_steps=10, image_guidance_scale=1).images[0]
+            images = pipe(prompt, negtive_prompt=neg_prompt, image=image, num_inference_steps=15, image_guidance_scale=1).images[0]
             img.tmp_data = images
             img.update()
         return
