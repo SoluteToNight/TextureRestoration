@@ -21,13 +21,15 @@ class PreProcess(Node):
         if not folders:   # 路径不包含文件夹，则直接处理文件
             self.mtl_handel(input_path)
             output_dir = os.path.join(output_path, os.path.basename(input_path))
-            os.mkdir(output_dir)    # 输出文件夹下的同名文件夹
+            if  os.path.exists(output_dir):
+                shutil.rmtree(output_dir)   # 输出文件夹下的同名文件夹
+            os.mkdir(output_dir)
             for content in contents :
-                if content.rfind(".obj") != -1 or content.rfind(".mtl") != -1:
+                if content.endswith(".obj")  or content.endswith(".mtl") :
                     in_path = os.path.join(input_path, content)
                     out_path = os.path.join(output_dir, content)
                     shutil.copy(in_path, out_path)
-                elif content.rfind(".jpg") != -1 or content.rfind(".png") != -1:
+                elif content.endswith(".jpg")  or content.endswith(".png") :
                     img_path = os.path.join(input_path, content)
                     img = timg(img_path)
                     self.img_list.append(img)

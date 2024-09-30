@@ -31,10 +31,11 @@ def main() -> None:
     img_list = []
 
     workflow.PreProcess(img_list).process(input_path, output_path)
-    workflow.Analyse(img_list).process()
+    # workflow.Analyse(img_list).process()
     workflow.Brightness(img_list).process()
-    workflow.Diffusion(img_list).process()
+    # workflow.Diffusion(img_list).process()
     for img in img_list:
         img.save(output_path)
+
 
 main()

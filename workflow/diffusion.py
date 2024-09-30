@@ -19,15 +19,15 @@ class Diffusion(Node):
 
     def process(self, *args):
         model_id = self.model
-        pipe = StableDiffusionInstructPix2PixPipeline.from_pretrained(model_id, torch_dtype=torch.float16,
+        pipe = StableDiffusionInstructPix2PixPipeline.from_pretrained(model_id, torch_dtype=torch.float32,
                                                                       safety_checker=None)
         pipe.to("cuda")
         pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
-        prompt = "erase blur,fix distoration,remove shadows and fill missing area"
-        neg_prompt = "blur,distortion,shadow"
+        prompt = "high quality image" # "deblur and erase the distortion"
+        # neg_prompt = "blur,distortion,shadow"
         for img in self.img_list:
             image = img.tmp_data
-            images = pipe(prompt, negtive_prompt=neg_prompt, image=image, num_inference_steps=15, image_guidance_scale=1).images[0]
+            images = pipe(prompt,  image=image, num_inference_steps=45, image_guidance_scale=1.5).images[0]
             img.tmp_data = images
             img.update()
         return

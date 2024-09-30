@@ -1,7 +1,7 @@
-
+from img_class import TextureImage as timg
 class Node:
     def __init__(self, inputs=None):
-        self.img_list = inputs
+        self.img_list:list[timg] = inputs
         self.model = None  # 应用的模型
         # self.model = 加载模型
 
