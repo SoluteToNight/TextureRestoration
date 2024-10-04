@@ -5,3 +5,4 @@ from .diffusion import Diffusion
 from .exposure import Exposure
 from .masking import Masking
 from .brightness import Brightness
+from .upscale import Upscale

@@ -13,12 +13,12 @@ class Upscale(Node):
         # Load pipeline
         controlnet = FluxControlNetModel.from_pretrained(
             self.model,
-            torch_dtype=torch.bfloat32
+            torch_dtype=torch.bfloat16
         )
         pipe = FluxControlNetPipeline.from_pretrained(
             "black-forest-labs/FLUX.1-dev",
             controlnet=controlnet,
-            torch_dtype=torch.bfloat32
+            torch_dtype=torch.bfloat16
         )
         pipe.to("cuda")
         for img in self.img_list:

@@ -3,7 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/models/Flux.1-dev-Controlnet-Upscaler" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/models/instruct-pix2pix" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/models/architecturerealmix" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/modules/mixture-of-diffusers" vcs="Git" />
   </component>
 </project>
