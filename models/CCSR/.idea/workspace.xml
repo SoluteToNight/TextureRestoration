@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="047b898e-3562-40c6-a02a-0e10f943ecf7" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../../.vscode/c_cpp_properties.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.vscode/launch.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../.vscode/tasks.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/.vscode/c_cpp_properties.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/.vscode/launch.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/.vscode/tasks.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/CA.pl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/ca-cert.srl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/ca-key.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/ca-req.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/cert.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/client.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/demoSRP/srp_verifier.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/demoSRP/srp_verifier.txt.attr" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/dsa-ca.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/dsa-pca.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/dsa1024.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/dsa512.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/dsap.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/pca-cert.srl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/pca-key.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/pca-req.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/privkey.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/req.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/rsa8192.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/s1024key.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/s1024req.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/s512-key.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/s512-req.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/server.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/server.srl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/server2.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/PEM/testCA.pem" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/capi.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/cnf/ct_log_list.cnf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/cnf/openssl-vms.cnf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/cnf/openssl.cnf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/dasync.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/legacy.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/libcrypto-3-x64.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/libssl-3-x64.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/loader_attic.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/openssl.cfg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/openssl.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/ossltest.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/p_test.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/padlock.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/progs.pl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../Code-C/bin/tsget.pl" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/.name" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/Code-py.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/.vscode/c_cpp_properties.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/.vscode/launch.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/.vscode/settings.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/.vscode/tasks.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/SDL2success.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/bestblockchain.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/blockchain(2).c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/blockchain.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/blockchain.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/blockchain1111.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/blockchain1111.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/blockchaingpt35(1).exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/blockchaingpt35.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/blockchaingpt4.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/copilot.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/data.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/finalblockchain.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/finalblockchain.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/flappybird.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/libcrypto-3-x64.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/libssl-3-x64.dll" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/main.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/newblockchain.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/realblockchain.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/tempCodeRunnerFile.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/test.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/test2.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/test2.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/test444.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/test444.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/test7.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/test7.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/test8.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/test8.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/testb.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/testb.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/testjian.c" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../cblockchain/testjian.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../build.sh" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../jsconfig.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../postcss.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/下陆区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/东宝区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/东西湖区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/丹江口市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/云梦县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/五峰土家族自治县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/京山市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/仙桃市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/伍家岗区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/保康县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/公安县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/兴山县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/利川市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/十堰市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/华容区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/南漳县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/咸丰县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/咸宁市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/咸安区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/嘉鱼县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/团风县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/大冶市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/大悟县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/天门市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/夷陵区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/孝南区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/孝感市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/孝昌县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/安陆市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/宜城市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/宜昌市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/宜都市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/宣恩县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/崇阳县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/巴东县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/广水市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/应城市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/建始县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/张湾区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/当阳市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/恩施土家族苗族自治州.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/恩施市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/房县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/掇刀区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/新洲区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/曾都区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/来凤县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/松滋市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/枝江市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/枣阳市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/梁子湖区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/樊城区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/武昌区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/武汉市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/武穴市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/汉南区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/汉川市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/汉阳区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/江夏区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/江岸区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/江汉区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/江陵县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/沙市区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/沙洋县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/洪山区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/洪湖市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/浠水县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/湖北省.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/潜江市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/点军区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/猇亭区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/监利市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/石首市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/硚口区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/神农架林区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/秭归县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/竹山县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/竹溪县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/红安县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/罗田县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/老河口市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/英山县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/茅箭区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/荆州区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/荆州市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/荆门市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/蔡甸区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/蕲春县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/襄城区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/襄州区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/襄阳市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/西塞山区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/西陵区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/谷城县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/赤壁市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/远安县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/通城县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/通山县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/郧西县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/郧阳区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/鄂城区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/鄂州市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/钟祥市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/铁山区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/长阳土家族自治县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/阳新县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/随县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/随州市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/青山区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/鹤峰县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/麻城市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/黄冈市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/黄州区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/黄梅县.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/黄石市.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/黄石港区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/Hubei/黄陂区.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/hubei_level3.geojson" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/Map/hubei_river_test.geojson" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/enshi_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/ezhou_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/huanggang_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/huangshi_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/jingmen_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/jingzhou_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/qianjiang_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/shennongjia_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/shiyan_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/suizhou_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/tianmen_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/wuhan_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/xiangyang_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/xianning_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/xiantao_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/xiaogan_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/dataGeoStatistics/yichang_geoStatistics.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/hubei_river.geojson" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../public/hubeisheng.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/App.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/api/api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/api/backendmanage.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/api/fenlist.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/api/visualization.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/back.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/base.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/img/back2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/img/guang.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/img/headers/juxing1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/img/headers/juxing2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/img/pageBg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/img/pageBg1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/img/top.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/img/zuo_xuxian.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/assets/main.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/giscal/LeftPanel.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/giscal/gismap/GISCalMap.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/giscal/gismap/ToolBox.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/giscal/leftpanel/LayerList.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/components/giscal/leftpanel/RegionTree.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/constants/tools.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/mock/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/router/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/style/fencemap_style.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/utils/event.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/utils/openlayers/maptype.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/utils/request.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/utils/tools/distance.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/utils/tools/draw.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/utils/util.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/BackendManage.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_BM/leftNav.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_BM/main_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_BM/main_City.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/Header.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/Left_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/Left_2.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/Left_3.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/MapChart.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/Right_1.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/Right_2.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/Right_3.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/scale-screen/index.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Components_DV/scale-screen/scale-screen.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/DataVisualization.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/Fence.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/GISCalculation.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/HomeView.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../src/views/NewGisCal.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../tailwind.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../vite.config.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../yarn.lock" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/src/taming-transformers" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;Copperplates&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/mayule/frontend.git&quot;,
+    &quot;accountId&quot;: &quot;1874c682-e289-41e4-8969-d64da4562d96&quot;
+  }
+}</component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 6
+}</component>
+  <component name="ProjectId" id="2Zu39E1mU2U1EW9sGWi9CYEFFC5" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Users/Documents/GitHub/CCSR&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\Users\Documents\GitHub\CCSR" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-PY-241.18034.82" />
+        <option value="bundled-python-sdk-975db3bf15a3-2767605e8bc2-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-241.18034.82" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="047b898e-3562-40c6-a02a-0e10f943ecf7" name="Changes" comment="" />
+      <created>1703257984114</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1703257984114</updated>
+      <workItem from="1726476350998" duration="12393000" />
+      <workItem from="1726561592495" duration="9083000" />
+      <workItem from="1727003255387" duration="609000" />
+      <workItem from="1728202248832" duration="320000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
