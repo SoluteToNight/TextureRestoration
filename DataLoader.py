@@ -1,6 +1,6 @@
 import os
 import shutil
-# 预处理，虽然我也不知道干嘛用
+
 from img_class import TextureImage as timg
 def load_data(input_path: str = None, output_path: str = None):
     script_path = os.getcwd()
