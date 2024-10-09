@@ -26,6 +26,7 @@ def load_data(input_path: str = None, output_path: str = None):
                         shutil.copy(mtl_path, os.path.join(output_folder, mtl_path))
                         shutil.copy(input_path, os.path.join(output_folder, os.path.basename(input_path)))
                         os.chdir(script_path)
+                        create_temp_folder(output_folder)
                         break
         elif os.path.isdir(input_path):
             for root, dirs, files in os.walk(input_path):
@@ -48,9 +49,13 @@ def load_data(input_path: str = None, output_path: str = None):
                                     shutil.copy(mtl_path, os.path.join(output_folder, mtl_path))
                                     shutil.copy(input_path, os.path.join(output_folder, os.path.basename(input_path)))
                                     os.chdir(script_path)
+                                    create_temp_folder(output_folder)
                                     break
+                        break
+                else:
+                    raise FileNotFoundError("No obj file found in the folder")
         else:
-            raise ValueError("input_path is not an obj file or a folder include an obj file")
+            raise ValueError("input_path is not an obj file")
 
 
 def mtl_handel(mtl_path: str =None):
@@ -80,3 +85,9 @@ def create_output_folder(input_path:str = None,output_path: str = None):
     with open(os.path.join(output_folder, "log.txt"), "w+") as f:
         f.write(f"Folder originate from {input_path}\n")
     return output_folder
+def create_temp_folder(tree_path: str = None):
+    folder_path = os.path.basename(tree_path)
+    temp_folder = os.path.join("tmp", folder_path)
+    if os.path.exists(temp_folder):
+        shutil.rmtree(temp_folder)
+    shutil.copy(tree_path, temp_folder)
