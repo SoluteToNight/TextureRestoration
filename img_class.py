@@ -11,8 +11,10 @@ class TextureImage:
         self.tmp_data = None
         self.brightness = None
         self.name = os.path.basename(path)
+        self.building_obj = None
         self.load_image()
-
+    def __str__(self):
+        return f"TextureImage:{self.img_path}"
     def load_image(self):
         if isinstance(self.img_path, str):
             if self.img_path.startswith("http://") or self.img_path.startswith("https://"):
@@ -43,3 +45,6 @@ class TextureImage:
     def save(self, path):
         save_path = os.path.join(path, os.path.basename(os.path.dirname(self.img_path)), self.name)
         self.img_data.save(save_path)
+    def tmp_save(self, path):
+        tmp_path = os.path.join(self.building_obj.temp_path, self.name)
+        self.img_data.save(tmp_path)

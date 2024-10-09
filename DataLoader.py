@@ -1,32 +1,40 @@
 import os
 import shutil
-
 from img_class import TextureImage as timg
+from BuildingObj import BuildingObj
+
 def load_data(input_path: str = None, output_path: str = None):
+    arg_list = []
     script_path = os.getcwd()
+    # print(script_path)
     if input_path is None:
         raise ValueError("input_path is None")
     if output_path is None:
         raise ValueError("output_path is None")
     if not os.path.isabs(input_path):
-        os.path.abspath(input_path)
+        input_path = os.path.abspath(input_path)
     if not os.path.isabs(output_path):
-        os.path.abspath(output_path)
+        output_path = os.path.abspath(output_path)
+    # print(input_path, output_path)
     if os.path.isfile(input_path):
         if input_path.endswith(".obj"):
-            output_folder = create_output_folder(input_path, output_path)
+            output_folder = create_output_folder(os.path.dirname(input_path), output_path)
+            # print(output_folder)
             with open(input_path, "r") as f:
-                while True:
-                    content = f.readline()
-                    if content.startswith("mtllib"):
+                lines = f.readlines()
+                for line in lines:
+                    if line.startswith("mtllib"):
                         os.chdir(os.path.dirname(input_path))
-                        mtl_path = content.split(" ")[1]
+                        mtl_path = line.split(" ")[1]
+                        mtl_path = mtl_path.replace("\n","")
                         mtl_handel(mtl_path)
-                        print("mtl_path:", mtl_path)
                         shutil.copy(mtl_path, os.path.join(output_folder, mtl_path))
-                        shutil.copy(input_path, os.path.join(output_folder, os.path.basename(input_path)))
+                        shutil.copy(input_path, os.path.join(output_folder, os.path.basename(os.path.basename(input_path))))
+                        mtl_path = os.path.abspath(mtl_path)
                         os.chdir(script_path)
-                        create_temp_folder(output_folder)
+                        temp_path = create_temp_folder(output_folder)
+                        temp_path = os.path.abspath(temp_path)
+                        arg_list.append((input_path, mtl_path, temp_path))
                         break
         elif os.path.isdir(input_path):
             for root, dirs, files in os.walk(input_path):
@@ -48,15 +56,21 @@ def load_data(input_path: str = None, output_path: str = None):
                                     print("mtl_path:", mtl_path)
                                     shutil.copy(mtl_path, os.path.join(output_folder, mtl_path))
                                     shutil.copy(input_path, os.path.join(output_folder, os.path.basename(input_path)))
+                                    mtl_path = os.path.abspath(mtl_path)
                                     os.chdir(script_path)
-                                    create_temp_folder(output_folder)
+                                    temp_path = create_temp_folder(output_folder)
+                                    temp_path = os.path.abspath(temp_path)
+                                    arg_list.append((input_path, mtl_path, temp_path))
                                     break
                         break
                 else:
                     raise FileNotFoundError("No obj file found in the folder")
         else:
             raise ValueError("input_path is not an obj file")
-
+    return load_building(arg_list)
+def load_building(arg_list):
+    for obj_path,mtl_path,temp_path in arg_list:
+        yield BuildingObj(obj_path,mtl_path,temp_path)
 
 def mtl_handel(mtl_path: str =None):
     print(mtl_path)
@@ -67,7 +81,7 @@ def mtl_handel(mtl_path: str =None):
             if line.find("map_Kd") != -1:
                 route = line.split(" ", 1)
                 route = os.path.basename(route[1])
-                route = os.path.join("./", route)
+                # route = os.path.join("", route)
                 line = "map_Kd " + route
             new_file.write(line)
     new_file.close()
@@ -87,7 +101,11 @@ def create_output_folder(input_path:str = None,output_path: str = None):
     return output_folder
 def create_temp_folder(tree_path: str = None):
     folder_path = os.path.basename(tree_path)
+    print(folder_path)
     temp_folder = os.path.join("tmp", folder_path)
+    print(temp_folder)
     if os.path.exists(temp_folder):
         shutil.rmtree(temp_folder)
-    shutil.copy(tree_path, temp_folder)
+    os.mkdir(temp_folder)
+    shutil.copytree(tree_path,temp_folder,dirs_exist_ok=True)
+    return temp_folder

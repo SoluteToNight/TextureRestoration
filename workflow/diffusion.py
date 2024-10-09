@@ -5,7 +5,7 @@ import requests
 import torch
 from diffusers import StableDiffusionInstructPix2PixPipeline, EulerAncestralDiscreteScheduler
 from diffusers import StableDiffusionImg2ImgPipeline
-from ..modules import mixdiff
+# from modules import mixdiff
 
 class Diffusion(Node):
     def __init__(self, inputs: list[timg] = None):
@@ -34,5 +34,4 @@ class Diffusion(Node):
                 img.update()
             return
         elif args[0]:
-
             return

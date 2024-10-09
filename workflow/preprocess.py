@@ -21,7 +21,7 @@ class PreProcess(Node):
         if not folders:   # 路径不包含文件夹，则直接处理文件
             self.mtl_handel(input_path)
             output_dir = os.path.join(output_path, os.path.basename(input_path))
-            if  os.path.exists(output_dir):
+            if os.path.exists(output_dir):
                 shutil.rmtree(output_dir)   # 输出文件夹下的同名文件夹
             os.mkdir(output_dir)
             for content in contents :
