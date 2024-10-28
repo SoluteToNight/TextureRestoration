@@ -7,7 +7,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture1.png
+map_Kd rebuildingtexture1.png
 
 newmtl mtl5
 Ka 0 0 0
@@ -16,7 +16,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture5.png
+map_Kd rebuildingtexture5.png
 
 newmtl mtl9
 Ka 0 0 0
@@ -25,7 +25,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture9.png
+map_Kd rebuildingtexture9.png
 
 newmtl mtl13
 Ka 0 0 0
@@ -34,7 +34,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture13.png
+map_Kd rebuildingtexture13.png
 
 newmtl mtl17
 Ka 0 0 0
@@ -43,7 +43,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture17.png
+map_Kd rebuildingtexture17.png
 
 newmtl mtl21
 Ka 0 0 0
@@ -52,7 +52,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture21.png
+map_Kd rebuildingtexture21.png
 
 newmtl mtl25
 Ka 0 0 0
@@ -61,7 +61,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture25.png
+map_Kd rebuildingtexture25.png
 
 newmtl mtl29
 Ka 0 0 0
@@ -70,7 +70,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture29.png
+map_Kd rebuildingtexture29.png
 
 newmtl mtl33
 Ka 0 0 0
@@ -79,7 +79,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture33.png
+map_Kd rebuildingtexture33.png
 
 newmtl mtl37
 Ka 0 0 0
@@ -88,7 +88,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture37.png
+map_Kd rebuildingtexture37.png
 
 newmtl mtl41
 Ka 0 0 0
@@ -97,7 +97,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture41.png
+map_Kd rebuildingtexture41.png
 
 newmtl mtl45
 Ka 0 0 0
@@ -106,7 +106,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture45.png
+map_Kd rebuildingtexture45.png
 
 newmtl mtl49
 Ka 0 0 0
@@ -115,7 +115,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture49.png
+map_Kd rebuildingtexture49.png
 
 newmtl mtl53
 Ka 0 0 0
@@ -124,7 +124,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture53.png
+map_Kd rebuildingtexture53.png
 
 newmtl mtl57
 Ka 0 0 0
@@ -133,7 +133,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture57.png
+map_Kd rebuildingtexture57.png
 
 newmtl mtl61
 Ka 0 0 0

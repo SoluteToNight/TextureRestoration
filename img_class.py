@@ -1,4 +1,6 @@
 import PIL
+import numpy as np
+import cv2 as cv
 from PIL import Image
 import os
 import requests
@@ -45,6 +47,15 @@ class TextureImage:
     def save(self, path):
         save_path = os.path.join(path, os.path.basename(os.path.dirname(self.img_path)), self.name)
         self.img_data.save(save_path)
-    def tmp_save(self, path):
+    def tmp_save(self):
         tmp_path = os.path.join(self.building_obj.temp_path, self.name)
         self.img_data.save(tmp_path)
+
+    def covert2nparray(self):
+        cv_img = np.array(self.img_data)[:,:,::-1]  # BGR格式
+        self.tmp_data = cv_img
+        return cv_img
+    def reconvert2PIL(self):
+        img = cv.cvtColor(self.tmp_data,cv.COLOR_BGR2RGB)
+        self.update()
+        return Image.fromarray(img)

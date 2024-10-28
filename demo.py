@@ -36,7 +36,7 @@ def main() -> None:
     tile = args.tile
     tile_size = args.tiling_size
     print("device:", device)
-    print(f"Loading image from {input_path}")
+
     img_list = []
     building = load_data(input_path, output_path)
     try:
@@ -48,7 +48,7 @@ def main() -> None:
         # workflow.PreProcess(img_list).process(input_path, output_path)
         # workflow.Analyse(img_list).process()
         # workflow.CCSR(img_list).process()
-        # workflow.Brightness(img_list).process()
+        workflow.Brightness(img_list).process()
         # workflow.Diffusion(img_list).process(tile, tile_size)
         # workflow.Upscale(img_list).process()
         workflow.Masking(img_list).process()

@@ -7,7 +7,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture1.png
+map_Kd rebuildingtexture1.png
 
 newmtl mtl5
 Ka 0 0 0
@@ -16,7 +16,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture5.png
+map_Kd rebuildingtexture5.png
 
 newmtl mtl9
 Ka 0 0 0
@@ -25,7 +25,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture9.png
+map_Kd rebuildingtexture9.png
 
 newmtl mtl13
 Ka 0 0 0
@@ -34,7 +34,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture13.png
+map_Kd rebuildingtexture13.png
 
 newmtl mtl17
 Ka 0 0 0
@@ -43,7 +43,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture17.png
+map_Kd rebuildingtexture17.png
 
 newmtl mtl21
 Ka 0 0 0
@@ -52,7 +52,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture21.png
+map_Kd rebuildingtexture21.png
 
 newmtl mtl25
 Ka 0 0 0
@@ -61,7 +61,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture25.png
+map_Kd rebuildingtexture25.png
 
 newmtl mtl29
 Ka 0 0 0
@@ -70,7 +70,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture29.png
+map_Kd rebuildingtexture29.png
 
 newmtl mtl33
 Ka 0 0 0
@@ -79,7 +79,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture33.png
+map_Kd rebuildingtexture33.png
 
 newmtl mtl37
 Ka 0 0 0
@@ -88,7 +88,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture37.png
+map_Kd rebuildingtexture37.png
 
 newmtl mtl41
 Ka 0 0 0
@@ -97,7 +97,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture41.png
+map_Kd rebuildingtexture41.png
 
 newmtl mtl45
 Ka 0 0 0
@@ -106,7 +106,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture45.png
+map_Kd rebuildingtexture45.png
 
 newmtl mtl49
 Ka 0 0 0
@@ -115,7 +115,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture49.png
+map_Kd rebuildingtexture49.png
 
 newmtl mtl53
 Ka 0 0 0
@@ -124,7 +124,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture53.png
+map_Kd rebuildingtexture53.png
 
 newmtl mtl57
 Ka 0 0 0
@@ -133,7 +133,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture57.png
+map_Kd rebuildingtexture57.png
 
 newmtl mtl61
 Ka 0 0 0
@@ -142,7 +142,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture61.png
+map_Kd rebuildingtexture61.png
 
 newmtl mtl65
 Ka 0 0 0
@@ -151,7 +151,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture65.png
+map_Kd rebuildingtexture65.png
 
 newmtl mtl69
 Ka 0 0 0
@@ -160,7 +160,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture69.png
+map_Kd rebuildingtexture69.png
 
 newmtl mtl73
 Ka 0 0 0
@@ -169,7 +169,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture73.png
+map_Kd rebuildingtexture73.png
 
 newmtl mtl77
 Ka 0 0 0
@@ -178,7 +178,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture77.png
+map_Kd rebuildingtexture77.png
 
 newmtl mtl81
 Ka 0 0 0
@@ -187,7 +187,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture81.png
+map_Kd rebuildingtexture81.png
 
 newmtl mtl85
 Ka 0 0 0
@@ -196,7 +196,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture85.png
+map_Kd rebuildingtexture85.png
 
 newmtl mtl89
 Ka 0 0 0
@@ -205,7 +205,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture89.png
+map_Kd rebuildingtexture89.png
 
 newmtl mtl93
 Ka 0 0 0
@@ -214,7 +214,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture93.png
+map_Kd rebuildingtexture93.png
 
 newmtl mtl97
 Ka 0 0 0
@@ -223,7 +223,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture97.png
+map_Kd rebuildingtexture97.png
 
 newmtl mtl101
 Ka 0 0 0
@@ -232,7 +232,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture101.png
+map_Kd rebuildingtexture101.png
 
 newmtl mtl105
 Ka 0 0 0
@@ -241,7 +241,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture105.png
+map_Kd rebuildingtexture105.png
 
 newmtl mtl109
 Ka 0 0 0
@@ -250,7 +250,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture109.png
+map_Kd rebuildingtexture109.png
 
 newmtl mtl113
 Ka 0 0 0
@@ -259,7 +259,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture113.png
+map_Kd rebuildingtexture113.png
 
 newmtl mtl117
 Ka 0 0 0
@@ -268,7 +268,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture117.png
+map_Kd rebuildingtexture117.png
 
 newmtl mtl121
 Ka 0 0 0
@@ -277,7 +277,7 @@ Ks 0 0 0
 Ns 100
 Tr 1
 illum 3
-map_Kd ./rebuildingtexture121.png
+map_Kd rebuildingtexture121.png
 
 newmtl mtl125
 Ka 0 0 0
