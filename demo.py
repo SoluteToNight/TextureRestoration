@@ -8,7 +8,7 @@ from DataLoader import load_data
 
 def arg_parser() -> Namespace:
     parser = ArgumentParser()
-    parser.add_argument("--input_dir", default="obj/test/scene.obj", help="input image dir")
+    parser.add_argument("--input_dir", default="obj/test1/scene.obj", help="input image dir")
     parser.add_argument("--output_dir", default="outputs", help="output image dir")
     parser.add_argument("--device", default="cuda", help="device")
     parser.add_argument("--tile", default=False, action="store_true",help="tile")
@@ -47,11 +47,11 @@ def main() -> None:
             print(img)
         # workflow.PreProcess(img_list).process(input_path, output_path)
         # workflow.Analyse(img_list).process()
-        # workflow.CCSR(img_list).process()
-        workflow.Brightness(img_list).process()
+        workflow.Upscale(img_list).process()
+        # workflow.Brightness(img_list).process()
         # workflow.Diffusion(img_list).process(tile, tile_size)
         # workflow.Upscale(img_list).process()
-        workflow.Masking(img_list).process()
+        # workflow.Masking(img_list).process()
         for img in img_list:
             img.save(output_path)
     except StopIteration:
