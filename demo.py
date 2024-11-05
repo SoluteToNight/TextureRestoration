@@ -1,5 +1,5 @@
 import os
-import workflow
+from workflow import *
 import torch
 from argparse import ArgumentParser, Namespace
 from PIL import Image
@@ -8,7 +8,7 @@ from DataLoader import load_data
 
 def arg_parser() -> Namespace:
     parser = ArgumentParser()
-    parser.add_argument("--input_dir", default="obj/test1/scene.obj", help="input image dir")
+    parser.add_argument("--input_dir", default="obj/test/scene.obj", help="input image dir")
     parser.add_argument("--output_dir", default="outputs", help="output image dir")
     parser.add_argument("--device", default="cuda", help="device")
     parser.add_argument("--tile", default=False, action="store_true",help="tile")
@@ -24,7 +24,18 @@ def check_device(device):
             print("No CUDA device is available, using CPU instead")
             return "cpu"
         return "cuda"
-
+def init_flow(config_file:str,img_list:list):
+    # with open(config_file) as cfg:
+    # 为json文件预留
+    # flow_list = [
+        # Analyse(img_list),
+    yield Masking(img_list)
+    yield Brightness(img_list)
+    yield Diffusion(img_list)
+    yield Upscale(img_list)
+    # ]
+    # for flow in flow_list:
+    #     yield flow
 
 def main() -> None:
     os.environ['HF_ENDPOINT'] = 'https://hf-mirror.com'
@@ -45,16 +56,18 @@ def main() -> None:
         img_list = bd.texture_list
         for img in img_list:
             print(img)
-        # workflow.PreProcess(img_list).process(input_path, output_path)
-        # workflow.Analyse(img_list).process()
-        workflow.Upscale(img_list).process()
-        # workflow.Brightness(img_list).process()
-        # workflow.Diffusion(img_list).process(tile, tile_size)
-        # workflow.Upscale(img_list).process()
-        # workflow.Masking(img_list).process()
+        for flow in init_flow("put/config/here.jsonl", img_list):
+            flow.process()
+        # Analyse(img_list).process()
+        # Upscale(img_list).process()
+        # Brightness(img_list).process()
+        # Diffusion(img_list).process(tile, tile_size)
+        # Upscale(img_list).process()
+        # Masking(img_list).process()
         for img in img_list:
             img.save(output_path)
     except StopIteration:
         print("No more data")
 
-main()
+if __name__ == "__main__":
+    main()

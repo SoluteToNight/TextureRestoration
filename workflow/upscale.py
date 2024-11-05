@@ -34,7 +34,7 @@ class Upscale(Node):
     @torch.no_grad()
     def process(self,
                 sr_scale=1,
-                steps: int = 45,
+                steps: int = 20,
                 t_max: float = 0.6667,
                 t_min: float = 0.3333,
                 strength: float = 1.0,

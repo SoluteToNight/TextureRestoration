@@ -19,19 +19,20 @@ class Diffusion(Node):
             img.tmp_data = img.tmp_data.convert("RGB")
 
     def process(self, *args):
-        if args is not None and args[0] == False:
-            model_id = self.model
-            pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_id, torch_dtype=torch.float16,
-                                                                  safety_checker=None)
-            pipe.to("cuda")
-            pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
-            prompt = "high quality image"  # "deblur and erase the distortion"
-            neg_prompt = "blur,distortion,shadow"
-            for img in self.img_list:
-                image = img.tmp_data
-                images = pipe(prompt, negtive_prompt=neg_prompt, image=image, strength=0.20, num_inference_steps=45).images[0]
-                img.tmp_data = images
-                img.update()
-            return
-        elif args[0]:
-            return
+        # if args is not None:
+        #     # if args[0] == False:
+        model_id = self.model
+        pipe = StableDiffusionImg2ImgPipeline.from_pretrained(model_id, torch_dtype=torch.float16,
+                                                              safety_checker=None)
+        pipe.to("cuda")
+        pipe.scheduler = EulerAncestralDiscreteScheduler.from_config(pipe.scheduler.config)
+        prompt = "high quality image"  # "deblur and erase the distortion"
+        neg_prompt = "blur,distortion,shadow"
+        for img in self.img_list:
+            image = img.tmp_data
+            images = pipe(prompt, negtive_prompt=neg_prompt, image=image, strength=0.20, num_inference_steps=45).images[0]
+            img.tmp_data = images
+            img.update()
+        return
+            # elif args[0]:
+            #     return
