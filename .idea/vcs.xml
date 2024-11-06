@@ -2,9 +2,14 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
+<<<<<<< Updated upstream
     <mapping directory="$PROJECT_DIR$/models/CCSR" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/models/TinyLLaVA-Phi-2-SigLIP-3.1B" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/models/architecturerealmix" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/modules/mixture-of-diffusers" vcs="Git" />
+=======
+    <mapping directory="$PROJECT_DIR$/models/LISA" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/models/LISA/bitsandbytes" vcs="Git" />
+>>>>>>> Stashed changes
   </component>
 </project>
