@@ -13,7 +13,7 @@ from models.LISA.utils.utils import (DEFAULT_IM_END_TOKEN, DEFAULT_IM_START_TOKE
 
 
 class Masking(Node):
-    def __init__(self, img_list, lisa_version="xinlai/LISA-13B-llama2-v1", precision="fp16", load_in_4bit=True,
+    def __init__(self, img_list, lisa_version="models/LISA-7B-v1", precision="fp16", load_in_4bit=True,
                  load_in_8bit=False, image_size=1024, save_path="./vis_output", use_mm_start_end=True):
         super().__init__(img_list)
         self.img_list = img_list
@@ -59,7 +59,7 @@ class Masking(Node):
             })
 
         self.model = LISAForCausalLM.from_pretrained(
-            lisa_version, low_cpu_mem_usage=True,vision_tower="openai/clip-vit-large-patch14",  seg_token_idx=self.seg_token_idx, **kwargs)
+            lisa_version, low_cpu_mem_usage=True,vision_tower="models/clip-vit-large-patch14",  seg_token_idx=self.seg_token_idx, **kwargs)
         #self.model.eval()
         self.model.config.eos_token_id = self.tokenizer.eos_token_id
         self.model.config.bos_token_id = self.tokenizer.bos_token_id
@@ -93,7 +93,7 @@ class Masking(Node):
         vision_tower = self.model.get_model().get_vision_tower()
         vision_tower.to(device=torch.device("cuda" if torch.cuda.is_available() else "cpu"))
 
-        self.clip_image_processor = CLIPImageProcessor.from_pretrained("openai/clip-vit-large-patch14")
+        self.clip_image_processor = CLIPImageProcessor.from_pretrained("models/clip-vit-large-patch14")
         self.transform = ResizeLongestSide(self.image_size)
 
         self.model.eval()
