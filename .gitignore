@@ -20,3 +20,5 @@
 /workflow/__pycache__
 /workflow/__pycache__
 *.pyc
+*.pyc
+/vis_output
