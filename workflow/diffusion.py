@@ -3,7 +3,6 @@ from img_class import TextureImage as timg
 import PIL
 import requests
 import torch
-from diffusers import StableDiffusionInstructPix2PixPipeline, EulerAncestralDiscreteScheduler
 from diffusers import StableDiffusionImg2ImgPipeline
 # from modules import mixdiff
 
