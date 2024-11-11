@@ -76,3 +76,5 @@ class Upscale(Node):
             )
             pred = preds[0]
             img.img_data = Image.fromarray(pred).resize(lq.size, Image.Resampling.LANCZOS)
+        del self.model
+        return

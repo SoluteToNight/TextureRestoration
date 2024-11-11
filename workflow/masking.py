@@ -218,7 +218,7 @@ class Masking(Node):
                 cv2.imwrite(masked_img_path, cv2.cvtColor(save_img, cv2.COLOR_RGB2BGR))
                 print(f"{masked_img_path} 已保存。")
 
-
+        del self.model
         for img in self.img_list:
             img.tmp_data = None
 
