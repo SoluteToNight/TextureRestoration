@@ -5,6 +5,8 @@ from argparse import ArgumentParser, Namespace
 from PIL import Image
 from img_class import TextureImage as timg
 from DataLoader import load_data
+from workflow.diffusion import Diffusion
+
 
 def arg_parser() -> Namespace:
     parser = ArgumentParser()
@@ -56,14 +58,14 @@ def main() -> None:
         img_list = bd.texture_list
         for img in img_list:
             print(img)
-        for flow in init_flow("put/config/here.jsonl", img_list):
-            flow.process()
+        # for flow in init_flow("put/config/here.jsonl", img_list):
+        #     flow.process()
         # Analyse(img_list).process()
         # Upscale(img_list).process()
         # Brightness(img_list).process()
         # Diffusion(img_list).process(tile, tile_size)
         # Upscale(img_list).process()
-        # Masking(img_list).process()
+        Masking(img_list).process()
         for img in img_list:
             img.save(output_path)
     except StopIteration:
