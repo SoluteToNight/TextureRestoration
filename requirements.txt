@@ -14,6 +14,7 @@ torchmetrics
 opencv-python-headless
 scipy
 matplotlib
+open-clip-torch==2.24.0
 lpips
 gradio==3.24.0
 chardet
