@@ -1,7 +1,4 @@
-
-/outputs/wanda
-/tmp
-/obj/高层
-/obj/高层
+/outputs
 /tmp
 /.idea
+/__pycache__
