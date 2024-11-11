@@ -19,3 +19,4 @@
 /models/CCSR/utils/__pycache__
 /workflow/__pycache__
 /workflow/__pycache__
+*.pyc
