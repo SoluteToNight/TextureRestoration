@@ -1,4 +1,6 @@
-transformers
+numpy
+opencv-python
+transformers==4.31.0
 taming-transformers
 diffusers
 xformers==0.0.27post1
@@ -18,4 +20,15 @@ chardet
 facexlib
 pyiqa
 pydantic==1.10.11
-ollama
+packaging
+sentencepiece
+fastapi==0.100.1
+markdown2==2.4.10
+openai==0.27.8
+pycocotools==2.0.6
+ray==2.6.1
+shortuuid==1.0.11
+tqdm==4.64.1
+uvicorn==0.23.2
+scipy==1.11.2
+bitsandbytes==0.41.1
