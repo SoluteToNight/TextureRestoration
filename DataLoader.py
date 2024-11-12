@@ -36,7 +36,7 @@ def load_data(input_path: str = None, output_path: str = None):
                         os.chdir(script_path)
                         temp_path = create_temp_folder(output_folder)
                         temp_path = os.path.abspath(temp_path)
-                        arg_list.append((input_path, mtl_path, temp_path))
+                        arg_list.append((input_path, mtl_path, temp_path,output_folder))
                         break
     elif os.path.isdir(input_path):
             #当路径是文件夹时，处理所有obj
@@ -67,15 +67,15 @@ def load_data(input_path: str = None, output_path: str = None):
                                     os.chdir(script_path)
                                     temp_path = create_temp_folder(output_folder)
                                     temp_path = os.path.abspath(temp_path)
-                                    arg_list.append((input_path, mtl_path, temp_path))
+                                    arg_list.append((input_path, mtl_path, temp_path,output_path))
                                     break
                         break
     else:
         raise ValueError("input_path is not an obj file")
     return load_building(arg_list)
 def load_building(arg_list):
-    for obj_path,mtl_path,temp_path in arg_list:
-        yield BuildingObj(obj_path,mtl_path,temp_path)
+    for obj_path,mtl_path,temp_path,output_path in arg_list:
+        yield BuildingObj(obj_path,mtl_path,temp_path,output_path)
 
 def mtl_handel(mtl_path: str =None):
     print(mtl_path)
