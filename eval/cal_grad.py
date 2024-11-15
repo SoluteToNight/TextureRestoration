@@ -15,6 +15,11 @@ def eval_by_grad(Building: BuildingObj):
         print("Processed Mean Gradient:", post_grad)
         ori_edge = edge(origin_texture)
         post_edge = edge(processed_texture_data)
+        processed_texture.tmp_save(post_edge)
+        cv2.imwrite(f"{Building.temp_path}/post_grad{post_grad}", post_edge)
+        cv2.imwrite(f"{Building.temp_path}/origin_grad{ori_grad}", ori_edge)
+
+
 def calculate_gradients(image):
     if image is None:
         print("Error: Could not open or find the image.")
@@ -29,28 +34,27 @@ def calculate_gradients(image):
     magnitude_8u = np.uint8(magnitude / np.max(magnitude) * 255)
     mean_magnitude = np.mean(magnitude)
     # 显示结果
-    plt.figure(figsize=(10, 8))
-    plt.subplot(2, 2, 1)
-    plt.title('Original Image')
-    plt.imshow(image, cmap='gray')
-    plt.subplot(2, 2, 2)
-    plt.title('Gradient Magnitude')
-    plt.imshow(magnitude_8u, cmap='gray')
-    plt.subplot(2, 2, 3)
-    plt.title('Gradient X')
-    plt.imshow(np.uint8(grad_x / np.max(np.abs(grad_x)) * 255), cmap='gray')
-    plt.subplot(2, 2, 4)
-    plt.title('Gradient Y')
-    plt.imshow(np.uint8(grad_y / np.max(np.abs(grad_y)) * 255), cmap='gray')
-    plt.tight_layout()
-    plt.show()
+    # plt.figure(figsize=(10, 8))
+    # plt.subplot(2, 2, 1)
+    # plt.title('Original Image')
+    # plt.imshow(image, cmap='gray')
+    # plt.subplot(2, 2, 2)
+    # plt.title('Gradient Magnitude')
+    # plt.imshow(magnitude_8u, cmap='gray')
+    # plt.subplot(2, 2, 3)
+    # plt.title('Gradient X')
+    # plt.imshow(np.uint8(grad_x / np.max(np.abs(grad_x)) * 255), cmap='gray')
+    # plt.subplot(2, 2, 4)
+    # plt.title('Gradient Y')
+    # plt.imshow(np.uint8(grad_y / np.max(np.abs(grad_y)) * 255), cmap='gray')
+    # plt.tight_layout()
+    # plt.show()
     return mean_magnitude
 def edge(image):
     edges = cv2.Canny(image, 100, 200)
-
     # 显示 Canny 边缘检测结果
-    plt.figure(figsize=(4, 4))
-    plt.title('Canny Edges')
-    plt.imshow(edges, cmap='gray')
-    plt.show()
-    return  edges
+    # plt.figure(figsize=(4, 4))
+    # plt.title('Canny Edges')
+    # plt.imshow(edges, cmap='gray')
+    # plt.show()
+    return edges

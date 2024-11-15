@@ -49,7 +49,7 @@ class TextureImage:
         save_path = os.path.join(path, self.name)
         self.img_data.save(save_path)
 
-    def tmp_save(self, data: [np.ndarray] = None):
+    def tmp_save(self,  data: [np.ndarray] = None):
         tmp_path = os.path.join(self.building_obj.temp_path, self.name)
         if data is None:
             self.img_data.save(tmp_path)
