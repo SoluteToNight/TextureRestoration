@@ -8,7 +8,6 @@ triton
 accelerate
 pytorch_lightning
 einops
-open-clip-torch
 omegaconf
 torchmetrics
 opencv-python-headless
