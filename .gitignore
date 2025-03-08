@@ -26,3 +26,8 @@ obj/building_pnts.zip
 /models
 /models
 /obj/dataset
+/tmp
+/tmp
+/vis_output
+*.pyc
+*.pyc
