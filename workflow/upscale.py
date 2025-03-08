@@ -12,8 +12,9 @@ import safetensors
 from safetensors.torch import load_file
 current_dir = os.path.dirname(os.path.abspath(__file__))
 ccsr_path = os.path.join(current_dir, '../models/CCSR')
-sys.path.append(ccsr_path)
-from models.CCSR import instantiate_from_config, load_state_dict, ControlLDM, auto_resize
+
+from models.CCSR import instantiate_from_config, load_state_dict, auto_resize
+from models.CCSR.model.ccsr_stage2 import ControlLDM
 import models.CCSR as CCSR
 
 
@@ -26,11 +27,18 @@ class Upscale(Node):
         config_file = os.path.join(current_dir, '../models/CCSR/configs/model/ccsr_stage2.yaml')
         # model_path = os.path.join(current_dir, '../models/CCSR/model/real-world_ccsr-fp32.ckpt')
         model_path = os.path.join(current_dir, '../models/CCSR/model/real-world_ccsr-fp16.safetensors')
-        self.model: ControlLDM = instantiate_from_config(OmegaConf.load(config_file))
-        load_state_dict(self.model, load_file(model_path))
-        self.model.eval()
-        self.model.to(self.device)
+        config = OmegaConf.load(config_file)
+        self.model: ControlLDM = instantiate_from_config(config)
+        self.model.to(dtype=torch.float16).to("cuda")
+        # print(self.model.control_model.dtype == torch.float16)
+        weights = load_file(model_path,device=self.device)
+        load_state_dict(self.model, weights,strict=False)
 
+        self.model.eval()
+
+        # self.model.to(self.device)
+        del weights
+        return
     @torch.no_grad()
     def process(self,
                 sr_scale=1,
@@ -57,7 +65,7 @@ class Upscale(Node):
             x = lq_resized.resize(
                 tuple(s // 64 * 64 for s in lq_resized.size), Image.Resampling.LANCZOS
             )
-            x = np.array(x)
+            x = np.array(x,dtype=np.float16)
             # x = pad(np.array(lq_resized), scale=64)
             # preds = CCSR.process(
             #     self.model, [x], steps=steps,
@@ -66,6 +74,7 @@ class Upscale(Node):
             #     color_fix_type=color_fix_type,
             #     tiled=True, tile_size=tile_size, tile_stride=tile_stride
             # )
+            print(self.model.dtype)
             preds = CCSR.process_tiled(
                 self.model, [x], steps=steps,
                 t_max=t_max, t_min=t_min,

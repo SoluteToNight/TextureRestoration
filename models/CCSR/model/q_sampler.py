@@ -7,8 +7,8 @@ import einops
 import os
 from PIL import Image
 
-from models.CCSR.ldm.modules.diffusionmodules.util import make_beta_schedule
-from models.CCSR.utils.image import (
+from ldm.modules.diffusionmodules.util import make_beta_schedule
+from utils.align_color import (
     wavelet_reconstruction, adaptive_instance_normalization
 )
 
@@ -472,6 +472,7 @@ class SpacedSampler:
     @torch.no_grad()
     def sample_with_tile_ccsr(
             self,
+            empty_text_embed: torch.Tensor,
             tile_size: int,
             tile_stride: int,
             steps: int,
@@ -519,7 +520,8 @@ class SpacedSampler:
                 for y in range(latent_height)]
 
             weights = np.outer(y_probs, x_probs)
-            return torch.tile(torch.tensor(weights, device=next(self.model.parameters()).device), (nbatches, 4, 1, 1))
+            
+            return torch.tile(torch.tensor(weights, dtype=torch.float32, device=next(self.model.parameters()).device), (nbatches, 4, 1, 1))
 
         # make sampling parameters (e.g. sigmas)
         self.make_schedule(num_steps=steps)
@@ -546,7 +548,7 @@ class SpacedSampler:
         # create buffers for accumulating predicted noise of different diffusion process
         noise_buffer = torch.zeros_like(img)
         count = torch.zeros_like(img)
-
+        
         # predict noise for each tile
         tiles_iterator = tqdm(_sliding_windows(h, w, tile_size // 8, tile_stride // 8))
         for hi, hi_end, wi, wi_end in tiles_iterator:
@@ -557,11 +559,11 @@ class SpacedSampler:
             tile_cond_img = cond_img[:, :, hi * 8:hi_end * 8, wi * 8: wi_end * 8]
             tile_cond = {
                 "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                "c_crossattn": [self.model.get_learned_conditioning([positive_prompt] * b)]
+                "c_crossattn": [empty_text_embed]
             }
             tile_uncond = {
                 "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                "c_crossattn": [self.model.get_learned_conditioning([negative_prompt] * b)]
+                "c_crossattn": [empty_text_embed]
             }
 
             # predict noise for this tile
@@ -574,7 +576,9 @@ class SpacedSampler:
         # fuse by tile_weights on noise (score)
         noise_buffer /= count
         pred_x0 = self._predict_xstart_from_eps(x_t=img, t=index, eps=noise_buffer)
-        tao_index = torch.tensor(torch.round(index * t_max), dtype=torch.int64)
+        tao_index = torch.round(index * t_max).clone().detach().to(torch.int64)
+
+        
         img = self.q_sample(pred_x0, tao_index)
 
         noise_buffer.zero_()
@@ -586,10 +590,9 @@ class SpacedSampler:
         total_steps_use = len(time_range)
         time_range = time_range[:-int(round(total_steps * t_min))]
         iterator = tqdm(time_range, desc="Spaced Sampler", total=total_steps)
-
+        pbar = comfy.utils.ProgressBar(total_steps // 3)
         # sampling loop
         for i, step in enumerate(iterator):
-
             ts = torch.full((b,), step, device=device, dtype=torch.long)
             index = torch.full_like(ts, fill_value=total_steps_use - i - 1)
 
@@ -603,11 +606,11 @@ class SpacedSampler:
                 tile_cond_img = cond_img[:, :, hi * 8:hi_end * 8, wi * 8: wi_end * 8]
                 tile_cond = {
                     "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                    "c_crossattn": [self.model.get_learned_conditioning([positive_prompt] * b)]
+                    "c_crossattn": [empty_text_embed * b]
                 }
                 tile_uncond = {
                     "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                    "c_crossattn": [self.model.get_learned_conditioning([negative_prompt] * b)]
+                    "c_crossattn": [empty_text_embed * b]
                 }
                 # predict noise for this tile
                 tile_noise = self.predict_noise(tile_img, ts, tile_cond, cfg_scale, tile_uncond)
@@ -615,7 +618,7 @@ class SpacedSampler:
                 # accumulate noise
                 noise_buffer[:, :, hi:hi_end, wi:wi_end] += tile_noise * tile_weights
                 count[:, :, hi:hi_end, wi:wi_end] += tile_weights
-
+            pbar.update(1)
             # average on noise (score)
             noise_buffer /= count
             # sample previous latent
@@ -638,6 +641,7 @@ class SpacedSampler:
             count.zero_()
 
         img = pred_x0
+        
         img_pixel = (self.model.decode_first_stage(img) + 1) / 2
         # apply color correction (borrowed from StableSR)
         if color_fix_type == "adain":
@@ -651,6 +655,7 @@ class SpacedSampler:
     @torch.no_grad()
     def sample_with_mixdiff_ccsr(
             self,
+            empty_text_embed: torch.Tensor,
             tile_size: int,
             tile_stride: int,
             steps: int,
@@ -695,6 +700,7 @@ class SpacedSampler:
         time_range = np.flip(self.timesteps)  # [1000, 950, 900, ...]
         total_steps = len(self.timesteps)
         iterator = tqdm(time_range, desc="Spaced Sampler", total=total_steps)
+        pbar = comfy.utils.ProgressBar(total_steps // 3)
 
         # q_sample for the start
         ts = torch.full((b,), time_range[0], device=device, dtype=torch.long)
@@ -710,11 +716,11 @@ class SpacedSampler:
             tile_cond_img = cond_img[:, :, hi * 8:hi_end * 8, wi * 8: wi_end * 8]
             tile_cond = {
                 "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                "c_crossattn": [self.model.get_learned_conditioning([positive_prompt] * b)]
+                "c_crossattn": [empty_text_embed]
             }
             tile_uncond = {
                 "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                "c_crossattn": [self.model.get_learned_conditioning([negative_prompt] * b)]
+                "c_crossattn": [empty_text_embed]
             }
             # predict noise for this tile
             tile_noise = self.predict_noise(tile_img, ts, tile_cond, cfg_scale, tile_uncond)
@@ -722,11 +728,12 @@ class SpacedSampler:
             # accumulate noise
             noise_buffer[:, :, hi:hi_end, wi:wi_end] += tile_noise
             count[:, :, hi:hi_end, wi:wi_end] += 1
-
+        
         # average on noise (score)
         noise_buffer.div_(count)
         pred_x0 = self._predict_xstart_from_eps(x_t=img, t=index, eps=noise_buffer)
-        tao_index = torch.tensor(torch.round(index * t_max), dtype=torch.int64)
+        tao_index = torch.round(index * t_max).clone().detach().to(torch.int64)
+
         img = self.q_sample(pred_x0, tao_index)
 
         noise_buffer.zero_()
@@ -755,11 +762,11 @@ class SpacedSampler:
                 tile_cond_img = cond_img[:, :, hi * 8:hi_end * 8, wi * 8: wi_end * 8]
                 tile_cond = {
                     "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                    "c_crossattn": [self.model.get_learned_conditioning([positive_prompt] * b)]
+                    "c_crossattn": [empty_text_embed]
                 }
                 tile_uncond = {
                     "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                    "c_crossattn": [self.model.get_learned_conditioning([negative_prompt] * b)]
+                    "c_crossattn": [empty_text_embed]
                 }
 
                 # predict noise for this tile
@@ -789,6 +796,7 @@ class SpacedSampler:
 
             noise_buffer.zero_()
             count.zero_()
+            pbar.update(1)
 
         img = pred_x0
         # decode samples of each diffusion process
@@ -814,6 +822,7 @@ class SpacedSampler:
     @torch.no_grad()
     def sample_with_mixdiff_control(
             self,
+            empty_text_embed: torch.Tensor,
             control_imgs: torch.Tensor,
             tile_size: int,
             tile_stride: int,
@@ -876,11 +885,11 @@ class SpacedSampler:
             tile_cond_img = cond_img[:, :, hi * 8:hi_end * 8, wi * 8: wi_end * 8]
             tile_cond = {
                 "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                "c_crossattn": [self.model.get_learned_conditioning([positive_prompt] * b)]
+                "c_crossattn": [empty_text_embed]
             }
             tile_uncond = {
                 "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                "c_crossattn": [self.model.get_learned_conditioning([negative_prompt] * b)]
+                "c_crossattn": [empty_text_embed]
             }
             # predict noise for this tile
             tile_noise = self.predict_noise(tile_img, ts, tile_cond, cfg_scale, tile_uncond)
@@ -922,11 +931,11 @@ class SpacedSampler:
                 tile_cond_img = cond_img[:, :, hi * 8:hi_end * 8, wi * 8: wi_end * 8]
                 tile_cond = {
                     "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                    "c_crossattn": [self.model.get_learned_conditioning([positive_prompt] * b)]
+                    "c_crossattn": [empty_text_embed]
                 }
                 tile_uncond = {
                     "c_latent": [self.model.apply_condition_encoder(tile_cond_img)],
-                    "c_crossattn": [self.model.get_learned_conditioning([negative_prompt] * b)]
+                    "c_crossattn": [empty_text_embed]
                 }
                 # predict noise for this tile
                 tile_noise = self.predict_noise(tile_img, ts, tile_cond, cfg_scale, tile_uncond)
@@ -980,6 +989,7 @@ class SpacedSampler:
     @torch.no_grad()
     def sample_ccsr(
             self,
+            empty_text_embed: torch.Tensor,
             steps: int,
             t_max: float,
             t_min: float,
@@ -1007,11 +1017,11 @@ class SpacedSampler:
 
         cond = {
             "c_latent": [self.model.apply_condition_encoder(cond_img)],
-            "c_crossattn": [self.model.get_learned_conditioning([positive_prompt] * b)]
+            "c_crossattn": [empty_text_embed]
         }
         uncond = {
             "c_latent": [self.model.apply_condition_encoder(cond_img)],
-            "c_crossattn": [self.model.get_learned_conditioning([negative_prompt] * b)]
+            "c_crossattn": [empty_text_embed]
         }
 
         # q_sample for the start
@@ -1028,14 +1038,17 @@ class SpacedSampler:
         total_steps_use = len(time_range)
         time_range = time_range[:-int(round(total_steps * t_min))]
         iterator = tqdm(time_range, desc="Spaced Sampler", total=total_steps)
+        pbar = comfy.utils.ProgressBar(total_steps // 3)
 
         for i, step in enumerate(iterator):
+            
             ts = torch.full((b,), step, device=device, dtype=torch.long)
             index = torch.full_like(ts, fill_value=total_steps_use - i - 1)
             img, x0 = self.p_sample_x0(
                 img, cond, ts, index=index,
                 cfg_scale=cfg_scale, uncond=uncond
             )
+            pbar.update(1)
 
         img = x0
         img_pixel = (self.model.decode_first_stage(img) + 1) / 2

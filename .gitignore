@@ -31,3 +31,5 @@ obj/building_pnts.zip
 /vis_output
 *.pyc
 *.pyc
+/obj
+/vis_output

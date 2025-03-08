@@ -2,8 +2,11 @@ import os
 import shutil
 from img_class import TextureImage as timg
 from BuildingObj import BuildingObj
+from typing import *
 
-def load_data(input_path: str = None, output_path: str = None):
+temp_folder = "./tmp"
+
+def load_dta(input_path: str = None, output_path: str = None):
     arg_list = []
     script_path = os.getcwd()
     # print(script_path)
@@ -80,37 +83,84 @@ def load_building(arg_list):
 def mtl_handel(mtl_path: str =None):
     print(mtl_path)
     dir_name = os.path.dirname(mtl_path)
-    new_file = open("new.tmp", "w+")
+    img_path = []
     with open(mtl_path, 'r', encoding='utf-8') as file:
         for line in file:
             if line.find("map_Kd") != -1:
-                route = line.split(" ", 1)
-                route = os.path.basename(route[1])
-                # route = os.path.join("./", route)
-                line = "map_Kd " + route
-            new_file.write(line)
-    new_file.close()
-    os.remove(os.path.basename(mtl_path))
-    os.rename("new.tmp", os.path.basename(mtl_path))
-
-
+                img_route = line.split(" ", 1)
+                if os.path.isabs(img_route):
+                    if not os.path.exists(img_route):
+                        # 如果绝对路径不存在，尝试使用相对路径
+                        img_route = os.path.basename(img_route)
+                img_path.append(img_route)
+    return img_path
 def create_output_folder(input_path:str = None,output_path: str = None):
-    folder_path = os.path.basename(input_path)
-    output_folder = os.path.join(output_path,folder_path)
+    folder_path = os.path.dirname(input_path)
+    output_folder = os.path.dirname(output_path)
     print(output_folder)
     if os.path.exists(output_folder):
         shutil.rmtree(output_folder)
-    os.mkdir(output_folder)
+    shutil.copy2(input_path,output_path)
     with open(os.path.join(output_folder, "log.txt"), "w+") as f:
         f.write(f"Folder originate from {input_path}\n")
-    return output_folder
-def create_temp_folder(tree_path: str = None):
-    folder_path = os.path.basename(tree_path)
-    print(folder_path)
-    temp_folder = os.path.join("tmp", folder_path)
-    print(temp_folder)
-    if os.path.exists(temp_folder):
-        shutil.rmtree(temp_folder)
-    os.mkdir(temp_folder)
-    shutil.copytree(tree_path,temp_folder,dirs_exist_ok=True)
-    return temp_folder
+    return True
+def create_temp_folder(input_path: str = None,temp_path:str = None):
+    folder_path = os.path.dirname(input_path)
+    tmp_folder = os.path.dirname(temp_path)
+    print(tmp_folder)
+    if os.path.exists(tmp_folder):
+        shutil.rmtree(tmp_folder)
+    os.makedirs(tmp_folder)
+    shutil.copy2(input_path,temp_path)
+    return True
+
+def pack_building_object(obj_path,mtl_path,temp_path,output_path):
+    print(f"Loading image from{obj_path}")
+    folder = os.path.dirname(obj_path)
+    with open(obj_path,'w') as f:
+        lines = f.readlines()
+        for line in lines:
+            if line.startswith("mtllib"):
+                mtl_path = line.split(" ")[1]
+                mtl_path = os.path.join(folder,mtl_path)
+        print(mtl_path)
+        # 根据mtl搜索图片
+    img_path_list = mtl_handel(mtl_path)
+
+
+def load_data(input_path,output_path):
+    if os.path.isdir(input_path):
+        print("input path is a folder")
+        obj_path_list = []
+        for dirpath,dirnames,filenames in os.walk(input_path):
+            for name in filenames:
+                if name.endswith(".obj"):
+                    obj_path = os.path.join(dirpath,name)
+                    obj_path_list.append(obj_path)
+
+            # obj_path = [name for name in filenames if name.endswith(".obj")]
+            # obj_path = [os.path.join(dirpath,obj) for obj in obj_path]
+            # obj_path_list.append(obj_path)
+        rel_input_path = [os.path.relpath(obj,input_path) for obj in obj_path_list]
+        # 生成在输出文件夹下的树状结构
+        output_path_list = [os.path.join(output_path,rel_path) for rel_path in rel_input_path]
+        # 生成在缓存文件夹下的树状结构
+        temp_path_list = [os.path.join(temp_folder,rel_path) for rel_path in rel_input_path]
+        for obj,output,temp in zip(obj_path_list,output_path_list,temp_path_list):
+            folder = os.path.dirname(obj)
+            with open(obj,"r") as f:
+                lines = f.readlines()
+                for line in lines:
+                    if line.startswith("mtllib"):
+                        mtl_path = line.split(" ")[1]
+                        mtl = os.path.join(folder, mtl_path)
+            create_output_folder(obj,output)
+            create_temp_folder(obj,temp)
+            shutil.copy2(mtl,os.path.dirname(output))
+            shutil.copy2(mtl,os.path.dirname(temp))
+            pack_building_object(obj,mtl,temp,output)
+    elif os.path.isfile(input_path):
+        if input_path.endswith('.obj'):
+            print("input path is a obj")
+        elif input_path.endswith('.png', 'jpg'):
+            print("input path is an image")

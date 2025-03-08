@@ -27,6 +27,7 @@ params:
     target: model.ccsr_stage2.ControlNet
     params:
       use_checkpoint: True
+      use_fp16: True
       image_size: 32 # unused
       in_channels: 4
       hint_channels: 4

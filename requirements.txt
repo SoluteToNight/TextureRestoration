@@ -4,7 +4,7 @@ transformers==4.31.0
 taming-transformers
 diffusers
 xformers==0.0.27post1
-triton
+
 accelerate
 pytorch_lightning
 einops

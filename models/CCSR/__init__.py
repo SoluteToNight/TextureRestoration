@@ -1,5 +1,5 @@
-import inference_ccsr
-import inference_ccsr_tile
+from . import inference_ccsr
+from . import inference_ccsr_tile
 from typing import List, Tuple, Optional
 import os
 import math
@@ -12,7 +12,7 @@ import pytorch_lightning as pl
 from PIL import Image
 from omegaconf import OmegaConf
 from torch.nn import functional as F
-
+from safetensors.torch import load_file
 from ldm.xformers_state import disable_xformers
 from model.q_sampler import SpacedSampler
 from model.ccsr_stage1 import ControlLDM
@@ -135,15 +135,18 @@ def process_tiled(
 
     n_samples = len(control_imgs)
     sampler = SpacedSampler(model, var_type="fixed_small")
-    control = torch.tensor(np.stack(control_imgs) / 255.0, dtype=torch.float32, device=model.device).clamp_(0, 1)
+    # control = torch.tensor(np.stack(control_imgs) / 255.0, dtype=torch.float32, device=model.device).clamp_(0, 1)
+    control = torch.tensor(np.stack(control_imgs) / 255.0, dtype=model.dtype, device=model.device).clamp_(0, 1)
     control = einops.rearrange(control, "n h w c -> n c h w").contiguous()
 
-    model.control_scales = [strength] * 13
+    empty_text_embed_sd = load_file(os.path.join(os.path.dirname(__file__), "empty_text_embed.safetensors"))
+    empty_text_embed = empty_text_embed_sd['empty_text_embed'].to(model.dtype).to(model.device)
 
+    model.control_scales = [strength] * 13
     height, width = control.size(-2), control.size(-1)
     shape = (n_samples, 4, height // 8, width // 8)
-    x_T = torch.randn(shape, device=model.device, dtype=torch.float32)
-
+    # x_T = torch.randn(shape, device=model.device, dtype=torch.float32)
+    x_T = torch.randn(shape, device=model.device, dtype=model.dtype)
     if not tile_diffusion and not tile_vae:
         # samples = sampler.sample_ccsr_stage1(
         #     steps=steps, t_max=t_max, shape=shape, cond_img=control,
@@ -151,7 +154,7 @@ def process_tiled(
         #     cfg_scale=1.0,
         #     color_fix_type=color_fix_type
         # )
-        samples = sampler.sample_ccsr(
+        samples = sampler.sample_ccsr(empty_text_embed=empty_text_embed,
             steps=steps, t_max=t_max, t_min=t_min, shape=shape, cond_img=control,
             positive_prompt="", negative_prompt="", x_T=x_T,
             cfg_scale=8.0,
@@ -161,7 +164,7 @@ def process_tiled(
         if tile_vae:
             model._init_tiled_vae(encoder_tile_size=vae_encoder_tile_size, decoder_tile_size=vae_decoder_tile_size)
         if tile_diffusion:
-            samples = sampler.sample_with_tile_ccsr(
+            samples = sampler.sample_with_tile_ccsr(empty_text_embed=empty_text_embed,
                 tile_size=tile_diffusion_size, tile_stride=tile_diffusion_stride,
                 steps=steps, t_max=t_max, t_min=t_min, shape=shape, cond_img=control,
                 positive_prompt="", negative_prompt="", x_T=x_T,
@@ -169,7 +172,7 @@ def process_tiled(
                 color_fix_type=color_fix_type
             )
         else:
-            samples = sampler.sample_ccsr(
+            samples = sampler.sample_ccsr(empty_text_embed=empty_text_embed,
                 steps=steps, t_max=t_max, t_min=t_min, shape=shape, cond_img=control,
                 positive_prompt="", negative_prompt="", x_T=x_T,
                 cfg_scale=1.0,
@@ -182,82 +185,3 @@ def process_tiled(
     preds = [x_samples[i] for i in range(n_samples)]
 
     return preds
-# @torch.no_grad()
-# def process(ccsr_model, image, resize_method, scale_by, steps, t_max, t_min, tile_size, tile_stride,
-#             color_fix_type, keep_model_loaded, vae_tile_size_encode, vae_tile_size_decode, sampling_method, seed):
-#     torch.manual_seed(seed)
-#     torch.cuda.manual_seed_all(seed)
-#     dtype = ccsr_model['dtype']
-#     model = ccsr_model['model']
-#     device = "cuda"
-#     # empty_text_embed = torch.load(os.path.join(script_directory, "empty_text_embed.pt"), map_location=device)
-#     sampler = SpacedSampler(model, var_type="fixed_small")
-#     width,height = image.size
-#     image, = image.resize((scale_by*width, scale_by*height), Image.Resampling.BICUBIC)
-#     B,H,W,C = image.shape
-#     # Calculate the new height and width, rounding down to the nearest multiple of 64.
-#     new_height = H // 64 * 64
-#     new_width = W // 64 * 64
-#
-#     # Reorder to [B, C, H, W] before using interpolate.
-#     image = image.permute(0, 3, 1, 2).contiguous()
-#     resized_image = F.interpolate(image, size=(new_height, new_width), mode='bicubic', align_corners=False)
-#
-#     strength = 1.0
-#     model.control_scales = [strength] * 13
-#
-#     model.to("cuda", dtype=dtype).eval()
-#
-#     height, width = resized_image.size(-2), resized_image.size(-1)
-#     shape = (1, 4, height // 8, width // 8)
-#     x_T = torch.randn(shape, device=model.device, dtype=torch.float32)
-#
-#     out = []
-#     if B > 1:
-#         for i in range(B):
-#             img = resized_image[i].unsqueeze(0).to(device)
-#             if sampling_method == 'ccsr_tiled_mixdiff':
-#                 model.reset_encoder_decoder()
-#                 print("Using tiled mixdiff")
-#                 samples = sampler.sample_with_mixdiff_ccsr(
-#                     tile_size=tile_size, tile_stride=tile_stride,
-#                     steps=steps, t_max=t_max, t_min=t_min, shape=shape, cond_img=img,
-#                     positive_prompt="", negative_prompt="", x_T=x_T,
-#                     cfg_scale=1.0,
-#                     color_fix_type=color_fix_type
-#                 )
-#             elif sampling_method == 'ccsr_tiled_vae_gaussian_weights':
-#                 model._init_tiled_vae(encoder_tile_size=vae_tile_size_encode // 8,
-#                                       decoder_tile_size=vae_tile_size_decode // 8)
-#                 print("Using gaussian weights")
-#                 samples = sampler.sample_with_tile_ccsr(
-#                      tile_size=tile_size, tile_stride=tile_stride,
-#                     steps=steps, t_max=t_max, t_min=t_min, shape=shape, cond_img=img,
-#                     positive_prompt="", negative_prompt="", x_T=x_T,
-#                     cfg_scale=1.0,
-#                     color_fix_type=color_fix_type
-#                 )
-#             else:
-#                 model.reset_encoder_decoder()
-#                 print("no tiling")
-#                 samples = sampler.sample_ccsr(
-#                     steps=steps, t_max=t_max, t_min=t_min, shape=shape, cond_img=img,
-#                     positive_prompt="", negative_prompt="", x_T=x_T,
-#                     cfg_scale=1.0,
-#                     color_fix_type=color_fix_type
-#                 )
-#             out.append(samples.squeeze(0).cpu())
-#             if B > 1:
-#                 print("Sampled image ", i, " out of ", B)
-#
-#     original_height, original_width = H, W
-#     processed_height = samples.size(2)
-#     target_width = int(processed_height * (original_width / original_height))
-#     out_stacked = torch.stack(out, dim=0).cpu().to(torch.float32).permute(0, 2, 3, 1)
-#     resized_back_image, = ImageScale.upscale(self, out_stacked, "lanczos", target_width, processed_height,
-#                                              crop="disabled")
-#
-#     if not keep_model_loaded:
-#         model.to(offload_device)
-#         mm.soft_empty_cache()
-#     return (resized_back_image,)

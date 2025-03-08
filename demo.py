@@ -7,10 +7,17 @@ from img_class import TextureImage as timg
 from DataLoader import load_data
 from workflow.diffusion import Diffusion
 from eval import cal_grad
+import sys
+
+from workflow.segment import Segment
+
+root_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# 将 models 目录添加到 sys.path
+sys.path.append(os.path.join(root_dir, 'models/CCSR'))
 
 def arg_parser() -> Namespace:
     parser = ArgumentParser()
-    parser.add_argument("--input_dir", default="obj/test/scene.obj", help="input image dir")
+    parser.add_argument("--input_dir", default="obj/building/scene.obj", help="input image dir")
     parser.add_argument("--output_dir", default="outputs", help="output image dir")
     parser.add_argument("--device", default="cuda", help="device")
     parser.add_argument("--tile", default=False, action="store_true",help="tile")
@@ -31,10 +38,11 @@ def init_flow(config_file:str,img_list:list):
     # 为json文件预留
     # flow_list = [
         # Analyse(img_list),
-    yield Masking(img_list)
-    yield Brightness(img_list)
-    yield Diffusion(img_list)
-    yield Upscale(img_list)
+    # yield Masking(img_list)
+    yield Segment(img_list)
+    # yield Brightness(img_list)
+    # yield Diffusion(img_list)
+    # yield Upscale(img_list)
     # ]
     # for flow in flow_list:
     #     yield flow
@@ -52,27 +60,29 @@ def main() -> None:
 
     img_list = []
     building = load_data(input_path, output_path)
-    try:
-        bd = next(building)
-        bd.load_texture()
-        img_list = bd.texture_list
-        # for img in img_list:
-        #     print(img)
-        # for flow in init_flow("put/config/here.jsonl", img_list):
-        #     flow.process()
-        #     del flow
-        # Analyse(img_list).process()
-        # Upscale(img_list).process()
-        # Brightness(img_list).process()
-        Upscale(img_list).process()
-        Diffusion(img_list).process(tile, tile_size)
-
-        # Masking(img_list).process()
-        for img in img_list:
-            img.save(f"{bd.output_path}")
-        cal_grad.eval_by_grad(bd)
-    except StopIteration:
-        print("No more data")
+    while True:
+        try:
+            bd = next(building)
+            bd.load_texture()
+            img_list = bd.texture_list
+            # for img in img_list:
+            #     print(img)
+            # for flow in init_flow("put/config/here.jsonl", img_list):
+            #     flow.process()
+            #     del flow
+            # Analyse(img_list).process()
+            # Upscale(img_list).process()
+            # Brightness(img_list).process()
+            # Upscale(img_list).process()
+            # Diffusion(img_list).process(tile, tile_size)
+            Segment(img_list).process()
+            # Masking(img_list).process()
+            for img in img_list:
+                img.save(f"{bd.output_path}")
+            # cal_grad.eval_by_grad(bd)
+        except StopIteration:
+            print("No more data")
+            break
 
 if __name__ == "__main__":
     main()

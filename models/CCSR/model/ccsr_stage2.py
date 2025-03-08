@@ -266,12 +266,15 @@ class ControlNet(nn.Module):
         return TimestepEmbedSequential(zero_module(conv_nd(self.dims, channels, channels, 1, padding=0)))
 
     def forward(self, x, hint, timesteps, context, **kwargs):
-        t_emb = timestep_embedding(timesteps, self.model_channels, repeat_only=False)
+        x.to(dtype=self.dtype)
+        hint.to(dtype=self.dtype)
+        t_emb = timestep_embedding(timesteps, self.model_channels, repeat_only=False).to(dtype=self.dtype)
         emb = self.time_embed(t_emb)
         x = torch.cat((x, hint), dim=1)
         outs = []
 
         h = x.type(self.dtype)
+        print(h.dtype)
         for module, zero_conv in zip(self.input_blocks, self.zero_convs):
             h = module(h, emb, context)
             outs.append(zero_conv(h, emb, context))

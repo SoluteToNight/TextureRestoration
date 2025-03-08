@@ -1,9 +1,10 @@
 from typing import Mapping, Any
 import importlib
+
 from torch import nn
 
 
-def get_obj_from_str(string: str, reload: bool=False) -> object:
+def get_obj_from_str(string: str, reload: bool = False) -> object:
     module, cls = string.rsplit(".", 1)
     if reload:
         module_imp = importlib.import_module(module)
@@ -30,21 +31,21 @@ def frozen_module(module: nn.Module) -> None:
         p.requires_grad = False
 
 
-def load_state_dict(model: nn.Module, state_dict: Mapping[str, Any], strict: bool=False) -> None:
+def load_state_dict(model: nn.Module, state_dict: Mapping[str, Any], strict: bool = False) -> None:
     state_dict = state_dict.get("state_dict", state_dict)
-    
+
     is_model_key_starts_with_module = list(model.state_dict().keys())[0].startswith("module.")
     is_state_dict_key_starts_with_module = list(state_dict.keys())[0].startswith("module.")
-    
+
     if (
-        is_model_key_starts_with_module and
-        (not is_state_dict_key_starts_with_module)
+            is_model_key_starts_with_module and
+            (not is_state_dict_key_starts_with_module)
     ):
         state_dict = {f"module.{key}": value for key, value in state_dict.items()}
     if (
-        (not is_model_key_starts_with_module) and
-        is_state_dict_key_starts_with_module
+            (not is_model_key_starts_with_module) and
+            is_state_dict_key_starts_with_module
     ):
         state_dict = {key[len("module."):]: value for key, value in state_dict.items()}
-    
+
     model.load_state_dict(state_dict, strict=False)

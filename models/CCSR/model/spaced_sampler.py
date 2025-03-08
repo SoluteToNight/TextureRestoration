@@ -9,7 +9,7 @@ from PIL import Image
 
 from ldm.modules.diffusionmodules.util import make_beta_schedule
 from model.cond_fn import Guidance
-from utils.image import (
+from utils.align_color import (
     wavelet_reconstruction, adaptive_instance_normalization
 )
 
@@ -469,7 +469,7 @@ class SpacedSampler:
         time_range = np.flip(self.timesteps) # [1000, 950, 900, ...]
         total_steps = len(self.timesteps)
         iterator = tqdm(time_range, desc="Spaced Sampler", total=total_steps)
-        
+
         # sampling loop
         for i, step in enumerate(iterator):
             ts = torch.full((b,), step, device=device, dtype=torch.long)

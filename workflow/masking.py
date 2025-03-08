@@ -13,8 +13,8 @@ from models.LISA.utils.utils import (DEFAULT_IM_END_TOKEN, DEFAULT_IM_START_TOKE
 
 
 class Masking(Node):
-    def __init__(self, img_list, lisa_version="models/LISA-7B-v1", precision="fp16", load_in_4bit=True,
-                 load_in_8bit=False, image_size=1024, save_path="./vis_output", use_mm_start_end=True):
+    def __init__(self, img_list, lisa_version="models/LISA-7B-v1", precision="fp16", load_in_4bit=False,
+                 load_in_8bit=True, image_size=1024, save_path="./vis_output", use_mm_start_end=True):
         super().__init__(img_list)
         self.img_list = img_list
         self.image_size = image_size
