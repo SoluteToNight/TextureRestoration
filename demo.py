@@ -17,7 +17,7 @@ sys.path.append(os.path.join(root_dir, 'models/CCSR'))
 
 def arg_parser() -> Namespace:
     parser = ArgumentParser()
-    parser.add_argument("--input_dir", default="obj/building/scene.obj", help="input image dir")
+    parser.add_argument("--input_dir", default="obj/building", help="input image dir")
     parser.add_argument("--output_dir", default="outputs", help="output image dir")
     parser.add_argument("--device", default="cuda", help="device")
     parser.add_argument("--tile", default=False, action="store_true",help="tile")
