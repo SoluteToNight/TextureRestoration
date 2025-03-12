@@ -201,7 +201,14 @@ def load_data(input_path,output_path):
             shutil.copy2(mtl, os.path.dirname(temp_path))
             return load_building([(obj, mtl, temp_path, output_path)])
         elif is_image_file(input_path):
+            img_format = input_path.split(".")[-1]
             print("input path is an image")
-            current_time = datetime.now().strftime("%Y-%m-%d")
-            output_path = os.path.join(output_path, current_time)
-            output_path
+            now = datetime.now()
+            current_time = now.strftime("%Y-%m-%d")
+            img_name = f"{now.strftime('%H%M%S')}.{img_format}"
+            output_path = os.path.join(output_path, current_time, img_name)
+            os.makedirs(output_path,exist_ok=True)
+            temp_path = os.path.join(temp_folder, current_time, img_name)
+            os.makedirs(temp_path,exist_ok=True)
+            empty_building_object = BuildingObj(None, None, temp_path, output_path)
+            empty_building_object.texture_list.append(timg(input_path))
