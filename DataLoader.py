@@ -3,7 +3,8 @@ import shutil
 from img_class import TextureImage as timg
 from BuildingObj import BuildingObj
 from typing import *
-
+from datetime import datetime
+import cv2
 temp_folder = "./tmp"
 
 # def load_dta(input_path: str = None, output_path: str = None):
@@ -79,6 +80,15 @@ temp_folder = "./tmp"
 def load_building(arg_list):
     for obj_path,mtl_path,temp_path,output_path in arg_list:
         yield BuildingObj(obj_path,mtl_path,temp_path,output_path)
+def is_image_file(file_path: str = None):
+    try:
+        img = cv2.imread(file_path,cv2.IMREAD_UNCHANGED)
+        if img is not None:
+            return True
+    except Exception as e:
+        print(e)
+        return False
+
 
 def mtl_handel(mtl_path: str =None):
     mtl_path = os.path.abspath(mtl_path)
@@ -132,6 +142,8 @@ def pack_building_object(obj_path,mtl_path,temp_path,output_path):
 
 
 def load_data(input_path,output_path):
+    if not os.path.exists(input_path):
+        raise ValueError("input_path is not exist")
     if os.path.isdir(input_path):
         print("input path is a folder")
         obj_path_list = []
@@ -173,5 +185,23 @@ def load_data(input_path,output_path):
     elif os.path.isfile(input_path):
         if input_path.endswith('.obj'):
             print("input path is a obj")
-        elif input_path.endswith('.png', 'jpg'):
+            obj = input_path
+            input_folder = os.path.dirname(obj)
+            with open(obj, 'r') as file:
+                for line in file:
+                    if line.startswith("mtllib"):
+                        mtl_path = line.split(" ")[1]
+                        mtl = os.path.join(input_folder, mtl_path)
+            output_path = os.path.join(output_path, os.path.basename(obj))
+            temp_path = os.path.join(temp_folder, os.path.basename(obj))
+            mtl_handel(mtl)
+            create_output_folder(obj, output_path)
+            create_temp_folder(obj, temp_path)
+            shutil.copy2(mtl, os.path.dirname(output_path))
+            shutil.copy2(mtl, os.path.dirname(temp_path))
+            return load_building([(obj, mtl, temp_path, output_path)])
+        elif is_image_file(input_path):
             print("input path is an image")
+            current_time = datetime.now().strftime("%Y-%m-%d")
+            output_path = os.path.join(output_path, current_time)
+            output_path
