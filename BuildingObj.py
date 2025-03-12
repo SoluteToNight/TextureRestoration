@@ -16,6 +16,8 @@ class BuildingObj:
         print(f"temp path{temp_path}")
         print(f"output path{output_path}")
     def load_texture(self):
+        if self.mtl_path is None:
+            return
         script_path = os.getcwd()
         print(self.mtl_path)
         os.chdir(os.path.dirname(self.mtl_path))
@@ -30,6 +32,5 @@ class BuildingObj:
                     img = TextureImage(texture_path)
                     img.building_obj = self
                     self.texture_list.append(img)
-
             os.chdir(script_path)
-        print( len(self.texture_list),"were loaded")
+        print(len(self.texture_list),"were loaded")
