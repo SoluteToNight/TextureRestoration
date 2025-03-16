@@ -79,6 +79,7 @@ temp_folder = "./tmp"
 #     return load_building(arg_list)
 def load_building(arg_list):
     for obj_path,mtl_path,temp_path,output_path in arg_list:
+        obj_path,mtl_path,temp_path,output_path = normalise_path(obj_path,mtl_path,temp_path,output_path)
         yield BuildingObj(obj_path,mtl_path,temp_path,output_path)
 def is_image_file(file_path: str = None):
     try:
@@ -100,7 +101,7 @@ def mtl_handel(mtl_path: str =None):
     with open(mtl_path, 'r', encoding='utf-8') as file:
         for line in file:
             if line.find("map_Kd") != -1:
-                img_route = line.split(" ", 1)
+                img_route = line.split(" ", 1)[-1]
                 if os.path.isabs(img_route):
                     if not os.path.exists(img_route):
                         # 如果绝对路径不存在，尝试使用相对路径
@@ -112,50 +113,86 @@ def mtl_handel(mtl_path: str =None):
                     line = "map_Kd"+" "+img_route
             new_file.write(line)
     new_file.close()
+    if os.path.exists("backup_mtl.txt"):
+        os.remove("backup_mtl.txt")
     os.rename(os.path.basename(mtl_path),"backup_mtl.txt")
     os.rename("new.tmp",os.path.basename(mtl_path))
+    os.chdir(script_path)
     return True
 
 def create_output_folder(input_path:str = None,output_path: str = None):
     folder_path = os.path.dirname(input_path)
     output_folder = os.path.dirname(output_path)
-    print(output_folder)
+    # print(output_folder)
     if os.path.exists(output_folder):
         shutil.rmtree(output_folder)
+    os.makedirs(output_folder,exist_ok=True)
     shutil.copy2(input_path,output_path)
     with open(os.path.join(output_folder, "log.txt"), "w+") as f:
         f.write(f"Folder originate from {input_path}\n")
     return True
 def create_temp_folder(input_path: str = None,temp_path:str = None):
-    folder_path = os.path.dirname(input_path)
-    tmp_folder = os.path.dirname(temp_path)
-    print(tmp_folder)
-    if os.path.exists(tmp_folder):
-        shutil.rmtree(tmp_folder)
-    os.makedirs(tmp_folder)
+    dirname,basename = os.path.split(temp_path)
+    if '.' in basename:
+        temp_path = dirname
+    # else:
+    #     temp_path = temp_path
+    if os.path.exists(temp_path):
+        shutil.rmtree(temp_path)
+    print(temp_path)
+    os.makedirs(temp_path,exist_ok=True)
     shutil.copy2(input_path,temp_path)
     return True
-
+def normalise_path(obj_path,mtl_path,temp_path,output_path):
+    # 将代码中的路径转换为绝对路径
+    obj_path  = os.path.normpath(obj_path)
+    mtl_path = os.path.normpath(mtl_path)
+    temp_path = os.path.normpath(temp_path)
+    output_path = os.path.normpath(output_path)
+    obj_path = os.path.abspath(obj_path)
+    mtl_path = os.path.abspath(mtl_path)
+    temp_path = os.path.abspath(temp_path)
+    output_path = os.path.abspath(output_path)
+    # 若tmp/output带有文件名，删除
+    if os.path.isfile(temp_path):
+        temp_path = os.path.dirname(temp_path)
+    if os.path.isfile(output_path):
+        output_path = os.path.dirname(output_path)
+    return obj_path,mtl_path,temp_path,output_path
 def pack_building_object(obj_path,mtl_path,temp_path,output_path):
     yield BuildingObj(obj_path, mtl_path, temp_path, output_path)
 
-
+def collect_obj(input_path: str = None):
+    obj_path_list = []
+    has_subdirectories = False
+    for dirpath, dirnames, filenames in os.walk(input_path):
+        if dirnames:
+            has_subdirectories = True
+        for name in filenames:
+            if name.endswith(".obj"):
+                obj_path = os.path.join(dirpath, name)
+                obj_path_list.append(obj_path)
+    return obj_path_list, has_subdirectories
 
 def load_data(input_path,output_path):
     if not os.path.exists(input_path):
         raise ValueError("input_path is not exist")
     if os.path.isdir(input_path):
         print("input path is a folder")
-        obj_path_list = []
-        for dirpath,dirnames,filenames in os.walk(input_path):
-            for name in filenames:
-                if name.endswith(".obj"):
-                    obj_path = os.path.join(dirpath,name)
-                    obj_path_list.append(obj_path)
-
+        # obj_path_list = []
+        # for dirpath,dirnames,filenames in os.walk(input_path):
+        #     for name in filenames:
+        #         if name.endswith(".obj"):
+        #             obj_path = os.path.join(dirpath,name)
+        #             obj_path_list.append(obj_path)
+        obj_path_list,has_sub_directories = collect_obj(input_path)
             # obj_path = [name for name in filenames if name.endswith(".obj")]
             # obj_path = [os.path.join(dirpath,obj) for obj in obj_path]
             # obj_path_list.append(obj_path)
+        if not has_sub_directories:
+            for obj_path in obj_path_list:
+                output_path = os.path.join(output_path,os.path.basename(input_path))
+                return load_data(obj_path,output_path)
         rel_input_path = [os.path.relpath(obj,input_path) for obj in obj_path_list]
         # 生成在输出文件夹下的树状结构
         output_path_list = [os.path.join(output_path,rel_path) for rel_path in rel_input_path]
@@ -170,12 +207,16 @@ def load_data(input_path,output_path):
                     if line.startswith("mtllib"):
                         mtl_path = line.split(" ")[1]
                         mtl = os.path.join(folder, mtl_path)
+                        mtl = mtl.strip()
+                        break
             # 到底为什么会有换行符？？
-            mtl.replace("\n","")
+            # mtl = mtl.replace("\n","")
             mtl_handel(mtl)
+            print(f"obj_path is{obj}",f"mtl_path is{mtl} ",f"temp_path is{temp}",f"output_path is{output}")
             create_output_folder(obj,output)
             create_temp_folder(obj,temp)
             # 复制mtl文件到输出文件夹和缓存文件夹
+
             shutil.copy2(mtl,os.path.dirname(output))
             shutil.copy2(mtl,os.path.dirname(temp))
             mtl_path_list.append(mtl)
@@ -192,13 +233,17 @@ def load_data(input_path,output_path):
                     if line.startswith("mtllib"):
                         mtl_path = line.split(" ")[1]
                         mtl = os.path.join(input_folder, mtl_path)
-            output_path = os.path.join(output_path, os.path.basename(obj))
-            temp_path = os.path.join(temp_folder, os.path.basename(obj))
+                        mtl = mtl.strip()
+                        break
+            print(f"obj_path is{obj}",f"mtl_path is{mtl}\n ",f"temp_path is{temp_folder}\n",f"output_path is{output_path}\n")
+            output_path = os.path.join(output_path, os.path.basename(input_folder))
+            temp_path = os.path.join(temp_folder, os.path.basename(input_folder))
+            print(temp_path)
             mtl_handel(mtl)
             create_output_folder(obj, output_path)
             create_temp_folder(obj, temp_path)
-            shutil.copy2(mtl, os.path.dirname(output_path))
-            shutil.copy2(mtl, os.path.dirname(temp_path))
+            shutil.copy2(mtl, output_path)
+            shutil.copy2(mtl, temp_path)
             return load_building([(obj, mtl, temp_path, output_path)])
         elif is_image_file(input_path):
             img_format = input_path.split(".")[-1]
