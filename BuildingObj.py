@@ -11,18 +11,19 @@ class BuildingObj:
         self.temp_path = temp_path
         self.output_path = output_path
         print("Loading image from:", obj_path)
-        print(f"obj path{obj_path}")
-        print(f"mtl path{mtl_path}")
-        print(f"temp path{temp_path}")
-        print(f"output path{output_path}")
+        print(f"obj path : {obj_path}")
+        print(f"mtl path : {mtl_path}")
+        print(f"temp path : {temp_path}")
+        print(f"output path : {output_path}")
     def load_texture(self):
         if self.mtl_path is None:
             return
+        mtl_path = os.path.abspath(self.mtl_path)
         script_path = os.getcwd()
         print(self.mtl_path)
         os.chdir(os.path.dirname(self.mtl_path))
         print(os.getcwd())
-        with open(self.mtl_path) as f:
+        with open(mtl_path) as f:
             lines = f.readlines()
             for line in lines:
                 line = line.strip()
