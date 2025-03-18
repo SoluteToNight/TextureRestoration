@@ -12,3 +12,4 @@ obj/building_pnts.zip
 *.pyc
 *.zip
 /vis_output
+/outputs
