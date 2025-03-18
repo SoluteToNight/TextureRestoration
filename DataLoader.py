@@ -77,6 +77,19 @@ temp_folder = "./tmp"
 #     else:
 #         raise ValueError("input_path is not an obj file")
 #     return load_building(arg_list)
+
+def is_filename(input_path:str = None):
+    if os.path.exists(input_path):
+        if os.path.isfile(input_path):
+            return True
+        else:
+            return False
+    else:
+        dirname, filename = os.path.split(input_path)
+        if '.' in filename:
+            return True
+        else:
+            return False
 def load_building(arg_list):
     for obj_path,mtl_path,temp_path,output_path in arg_list:
         obj_path,mtl_path,temp_path,output_path = normalise_path(obj_path,mtl_path,temp_path,output_path)
@@ -154,9 +167,9 @@ def normalise_path(obj_path,mtl_path,temp_path,output_path):
     temp_path = os.path.abspath(temp_path)
     output_path = os.path.abspath(output_path)
     # 若tmp/output带有文件名，删除
-    if os.path.isfile(temp_path):
+    if is_filename(temp_path):
         temp_path = os.path.dirname(temp_path)
-    if os.path.isfile(output_path):
+    if is_filename(output_path):
         output_path = os.path.dirname(output_path)
     return obj_path,mtl_path,temp_path,output_path
 def pack_building_object(obj_path,mtl_path,temp_path,output_path):
@@ -257,3 +270,6 @@ def load_data(input_path,output_path):
             os.makedirs(temp_path,exist_ok=True)
             empty_building_object = BuildingObj(None, None, temp_path, output_path)
             empty_building_object.texture_list.append(timg(input_path))
+            return empty_building_object
+        else:
+            raise(ValueError("input path does not "))

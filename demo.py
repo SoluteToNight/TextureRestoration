@@ -17,7 +17,7 @@ sys.path.append(os.path.join(root_dir, 'models/CCSR'))
 
 def arg_parser() -> Namespace:
     parser = ArgumentParser()
-    parser.add_argument("--input_dir", default="obj/dataset", help="input image dir")
+    parser.add_argument("--input_dir", default="obj", help="input image dir")
     parser.add_argument("--output_dir", default="outputs", help="output image dir")
     parser.add_argument("--device", default="cuda", help="device")
     parser.add_argument("--tile", default=False, action="store_true",help="tile")
@@ -64,7 +64,7 @@ def main() -> None:
     while True:
         try:
             bd = next(building)
-            bd.load_texture()
+            # bd.load_texture()
             img_list = bd.texture_list
             # for img in img_list:
             #     print(img)
