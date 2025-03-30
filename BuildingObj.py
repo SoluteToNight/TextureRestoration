@@ -15,8 +15,7 @@ class BuildingObj:
         print(f"mtl path : {mtl_path}")
         print(f"temp path : {temp_path}")
         print(f"output path : {output_path}")
-        if mtl_path is not None:
-            self.load_texture()
+        self.load_texture()
 
     def load_texture(self):
         if self.mtl_path is None:

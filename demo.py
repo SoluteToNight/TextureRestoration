@@ -17,7 +17,7 @@ sys.path.append(os.path.join(root_dir, 'models/CCSR'))
 
 def arg_parser() -> Namespace:
     parser = ArgumentParser()
-    parser.add_argument("--input_dir", default="obj", help="input image dir")
+    parser.add_argument("--input_dir", default="obj/synthetic/syn_3.jpg", help="input image dir")
     parser.add_argument("--output_dir", default="outputs", help="output image dir")
     parser.add_argument("--device", default="cuda", help="device")
     parser.add_argument("--tile", default=False, action="store_true",help="tile")
@@ -76,7 +76,7 @@ def main() -> None:
             # Brightness(img_list).process()
             # Upscale(img_list).process()
             # Diffusion(img_list).process(tile, tile_size)
-            # Segment(img_list).process()
+            Segment(img_list).process()
             # Masking(img_list).process()
             for img in img_list:
                 img.save(f"{bd.output_path}")

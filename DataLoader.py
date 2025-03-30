@@ -199,13 +199,15 @@ def load_data(input_path,output_path):
         #             obj_path = os.path.join(dirpath,name)
         #             obj_path_list.append(obj_path)
         obj_path_list,has_sub_directories = collect_obj(input_path)
+        print(obj_path_list)
             # obj_path = [name for name in filenames if name.endswith(".obj")]
             # obj_path = [os.path.join(dirpath,obj) for obj in obj_path]
             # obj_path_list.append(obj_path)
         if not has_sub_directories:
             for obj_path in obj_path_list:
                 output_path = os.path.join(output_path,os.path.basename(input_path))
-                return load_data(obj_path,output_path)
+                yield from load_data(obj_path,output_path)
+                return
         rel_input_path = [os.path.relpath(obj,input_path) for obj in obj_path_list]
         # 生成在输出文件夹下的树状结构
         output_path_list = [os.path.join(output_path,rel_path) for rel_path in rel_input_path]
@@ -225,7 +227,6 @@ def load_data(input_path,output_path):
             # 到底为什么会有换行符？？
             # mtl = mtl.replace("\n","")
             mtl_handel(mtl)
-            print(f"obj_path is{obj}",f"mtl_path is{mtl} ",f"temp_path is{temp}",f"output_path is{output}")
             create_output_folder(obj,output)
             create_temp_folder(obj,temp)
             # 复制mtl文件到输出文件夹和缓存文件夹
@@ -235,7 +236,8 @@ def load_data(input_path,output_path):
             mtl_path_list.append(mtl)
             # 打包obj模型
             # pack_building_object(obj,mtl,temp,output)
-        return load_building(zip(obj_path_list,mtl_path_list,temp_path_list,output_path_list))
+        yield from load_building(zip(obj_path_list,mtl_path_list,temp_path_list,output_path_list))
+        return
     elif os.path.isfile(input_path):
         if input_path.endswith('.obj'):
             print("input path is a obj")
@@ -257,19 +259,24 @@ def load_data(input_path,output_path):
             create_temp_folder(obj, temp_path)
             shutil.copy2(mtl, output_path)
             shutil.copy2(mtl, temp_path)
-            return load_building([(obj, mtl, temp_path, output_path)])
+            yield from load_building([(obj, mtl, temp_path, output_path)])
+            return
         elif is_image_file(input_path):
             img_format = input_path.split(".")[-1]
             print("input path is an image")
             now = datetime.now()
             current_time = now.strftime("%Y-%m-%d")
             img_name = f"{now.strftime('%H%M%S')}.{img_format}"
-            output_path = os.path.join(output_path, current_time, img_name)
+            output_path = os.path.join(output_path, current_time)
             os.makedirs(output_path,exist_ok=True)
-            temp_path = os.path.join(temp_folder, current_time, img_name)
+            temp_path = os.path.join(temp_folder, current_time)
             os.makedirs(temp_path,exist_ok=True)
             empty_building_object = BuildingObj(None, None, temp_path, output_path)
-            empty_building_object.texture_list.append(timg(input_path))
-            return empty_building_object
+            texture_image = timg(input_path)
+            texture_image.building_obj = empty_building_object
+            texture_image.name = img_name
+            empty_building_object.texture_list.append(texture_image)
+            yield empty_building_object
+            return
         else:
             raise(ValueError("input path does not "))

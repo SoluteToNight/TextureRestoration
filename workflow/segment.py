@@ -1,6 +1,7 @@
 import os.path
 from os.path import split
 from collections import Counter
+import torch
 
 from .node import Node
 from modules.GroundedSam import load_sam2,load_dino,predict_mask
@@ -155,7 +156,6 @@ class Segment(Node):
         self.sam2_predictor = load_sam2()
         self.dino = load_dino()
     def process(self):
-
         for img in self.img_list:
             prompt_list = ["window","windows"]
             resized = auto_resize(img)
@@ -171,7 +171,7 @@ class Segment(Node):
                 rate = 0
                 threshold_history = []
                 predict_history = []
-                mask_path = os.path.join(img.building_obj.temp_path ,img.name)
+                mask_path = os.path.join(img.building_obj.temp_path,img.name)
 
                 if not os.path.exists(img.building_obj.temp_path):
                     os.makedirs(img.building_obj.temp_path)
@@ -190,12 +190,14 @@ class Segment(Node):
                     # if iter_count >= 3:
                     #     break
                     # iter_count += 1
+                    if rate ==0.0:
+                        break
                     box_threshold += step
                     text_threshold += step
                 masks,missing = analyse_mask(predict_history,prompt, self.sam2_predictor, self.dino)
 
                 if masks is None:
-                    masks =  np.zeros_like(cv2.imread(img_path))
+                    masks = np.zeros_like(cv2.imread(img_path))
                 if resized:
                     masks = (masks > 0).astype(np.uint8)*255
                     masks = cv2.resize(masks, img.img_data.size, interpolation=cv2.INTER_CUBIC)
@@ -208,8 +210,6 @@ class Segment(Node):
                         missing = cv2.resize(missing, img.img_data.size, interpolation=cv2.INTER_CUBIC)
                         missing = (missing > 0).astype(bool)
                     save_masks_as_files(missing, "missing", mask_path)
-
-
                     # else:
                     #     break
                 # if resized:
